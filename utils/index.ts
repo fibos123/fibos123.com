@@ -5,7 +5,7 @@ const formatNumber = (num: number): string => {
 }
 
 const formatPercent = (num: number): string => {
-  return num.toFixed(3)
+  return num.toFixed(2)
 }
 
 const formatDate = (date: string | number): string => {
