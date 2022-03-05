@@ -28,7 +28,7 @@ export default function IndexPage() {
           <h5 className="text-xl pt-6">联系</h5>
           <p>
             <b className="pr-2">Email</b>
-            <span>mingfun.wong.chn@gmail.com</span>
+            <span>bp@fibos123.com</span>
           </p>
 
           <h5 className="text-xl pt-6">物料下载</h5>
