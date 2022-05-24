@@ -1,5 +1,5 @@
 const api_endpoint = 'https://api.fibos123.com';
-const rpc_endpoint = 'https://fo.blockeden.cn'; // thanks FIBOS ROCKS
+const rpc_endpoint = 'https://to-rpc.fibos.io';
 const config = {
   api_endpoint,
   api_bp_status: api_endpoint + '/bp_status',
