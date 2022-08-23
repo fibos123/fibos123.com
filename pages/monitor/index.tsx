@@ -55,15 +55,10 @@ export default function IndexPage() {
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
-              <a href="/monitor" className="bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">
-                出块节点在线状态
-              </a>
+              <a className="bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">出块节点在线状态</a>
             </Link>
             <Link href="/monitor/pointer">
-              <a
-                href="/monitor/pointer"
-                className="ml-4 text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white"
-              >
+              <a className="ml-4 text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
                 接入点状态监测
               </a>
             </Link>

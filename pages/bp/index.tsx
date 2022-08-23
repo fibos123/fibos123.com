@@ -52,7 +52,8 @@ export default function IndexPage() {
       setCardList(cardList);
     }
     async function fetchBpList() {
-      const [producers, producerJson, global] = await Promise.all<ProducerRow[], ProducerJsonRow[], GlobalRow>([
+      // @ts-ignore
+      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([
         Chain.getProducers(),
         Chain.getProducerJson(),
         Chain.getGlobal(),
@@ -125,7 +126,12 @@ export default function IndexPage() {
                       {utils.formatNumber(item.claim_rewards_unreceived)} FO
                     </td>
                     <td className="text-slate-400">
-                      <a href={item.urlFull} target="_blank" rel="noreferrer" className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">
+                      <a
+                        href={item.urlFull}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out"
+                      >
                         {item.urlSimple}
                       </a>
                     </td>

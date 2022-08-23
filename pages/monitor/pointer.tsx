@@ -53,17 +53,12 @@ export default function IndexPage() {
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
-              <a
-                href="/monitor"
-                className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white"
-              >
+              <a className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
                 出块节点在线状态
               </a>
             </Link>
             <Link href="/monitor/pointer">
-              <a href="/monitor/pointer" className="ml-4 bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">
-                接入点状态监测
-              </a>
+              <a className="ml-4 bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">接入点状态监测</a>
             </Link>
           </div>
 
@@ -107,7 +102,13 @@ export default function IndexPage() {
                           }[item.status]
                         }
                         {item.status !== "notset" && (
-                          <a target="_blank" href={item.ssl_endpoint + "/v1/chain/get_info"} rel="noreferrer" className="ml-4 fill-indigo-500" title="打开新窗口查看接入点">
+                          <a
+                            target="_blank"
+                            href={item.ssl_endpoint + "/v1/chain/get_info"}
+                            rel="noreferrer"
+                            className="ml-4 fill-indigo-500"
+                            title="打开新窗口查看接入点"
+                          >
                             <i className={"inline-block w-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
                           </a>
                         )}
