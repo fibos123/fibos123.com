@@ -34,9 +34,9 @@ table tbody td {
   color: white;
 }
 
-.dark .text-slate-500,
-.dark .text-indigo-500,
-.dark nav .text-indigo-600 {
+.dark .text-indigo-600,
+.dark a {
+  fill: white;
   color: white;
 }
 
@@ -46,5 +46,6 @@ table tbody td {
 }
 
 .dark a:hover {
+  fill: #999;
   color: #999;
 }
