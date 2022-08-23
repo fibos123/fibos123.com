@@ -109,7 +109,7 @@ export default function IndexPage() {
                             className="ml-4 fill-indigo-500"
                             title="打开新窗口查看接入点"
                           >
-                            <i className={"inline-block w-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
+                            <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
                           </a>
                         )}
                       </td>

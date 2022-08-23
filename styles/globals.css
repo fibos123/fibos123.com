@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+svg {
+  width: inherit;
+  height: inherit;
+}
+
 table tr > * {
   @apply whitespace-nowrap;
 }

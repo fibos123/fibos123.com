@@ -53,8 +53,8 @@ const Home: NextPage = () => {
           {sites.map((item) => (
             <section key={item.name} className="bg-white p-4 rounded mb-4">
               <div className="border-b text-lg pb-4 sm:pl-2">
-                {item.icon && <i className={"inline-block w-4 mr-2"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>}
-                {item.name}
+                {item.icon && <i className={"inline-block w-5 h-5 mr-2 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>}
+                <span className="align-middle">{item.name}</span>
               </div>
               {item.sub.map((item) => (
                 <div key={item.name} className="sm:flex relative">
@@ -75,14 +75,13 @@ const Home: NextPage = () => {
                           <p className="pb-1 text-blue-500 fill-blue-500">
                             {item.icon && (
                               <i
-                                className={"inline-block w-4 mr-1"}
+                                className={"inline-block w-4 mr-2 align-middle"}
                                 dangerouslySetInnerHTML={{
                                   __html: item.icon,
                                 }}
                               ></i>
                             )}
-
-                            {item.name}
+                            <span className="align-middle">{item.name}</span>
                           </p>
                           <p className="text-sm text-slate-500">{item.desc}</p>
                         </a>

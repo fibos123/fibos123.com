@@ -77,7 +77,7 @@ const Header = () => {
                   }
                   href={item.path}
                 >
-                  <i className={"inline-block w-4 mr-1 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
+                  <i className={"inline-block w-4 mr-2 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
                   <span className="align-middle">{item.name}</span>
                 </a>
               </Link>
