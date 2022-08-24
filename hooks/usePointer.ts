@@ -1,11 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-import config from "../config";
 import { IPointerList } from "../interfaces/IPointerList";
-import { IProducerJsonRow } from "../interfaces/IProducerJson";
 import Pointer from "../models/Pointer";
-import { get, post } from "../utils/api";
 
 interface IAccessPoints {
   "p2p-peer-address": string[];
@@ -14,16 +10,6 @@ interface IAccessPoints {
 }
 
 export const usePointer = () => {
-  const producerJsonBody = {
-    json: true,
-    code: "producerjson",
-    scope: "producerjson",
-    table: "producerjson",
-    limit: 1000,
-  };
-
-  const { data, error } = useSWR<IProducerJsonRow>(config.rpc_get_table_rows, post(producerJsonBody));
-
   const [accessPoints, setAccessPoints] = useState<IAccessPoints>();
   const [pointerList, setPointerList] = useState<IPointerList[]>([]);
 
@@ -56,7 +42,5 @@ export const usePointer = () => {
   return {
     accessPoints,
     pointerList,
-    isLoading: error && !data,
-    isError: error,
   };
 };

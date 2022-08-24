@@ -5,7 +5,7 @@ import { IInfo } from "../interfaces/IInfo";
 import utils from "../utils";
 import { get } from "../utils/api";
 
-export const useInfo = () => {
+export const useBpInfo = () => {
   const refreshInterval = 1000;
   const dedupingInterval = 500;
 

@@ -1,10 +1,11 @@
+import type { NextPage } from "next";
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import utils from "../../utils";
 import { useBpStatus } from "../../hooks";
 
-export default function IndexPage() {
-  const { card, bpStatus, isLoading, isError } = useBpStatus();
+const Page: NextPage = () => {
+  const { card, bpStatus } = useBpStatus();
 
   return (
     <Layout title="节点监控 | FIBOS 导航">
@@ -75,4 +76,5 @@ export default function IndexPage() {
       </div>
     </Layout>
   );
-}
+};
+export default Page;

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Layout from "../components/Layout";
 
-const About: NextPage = () => {
+const Page: NextPage = () => {
   return (
     <Layout title="BP 信息 | FIBOS 导航" mode="dark">
       <div className="p-6 flex items-center justify-center h-full">
@@ -54,4 +54,4 @@ const About: NextPage = () => {
   );
 };
 
-export default About;
+export default Page;

@@ -1,26 +1,12 @@
+import type { NextPage } from "next";
 import Layout from "../../components/Layout";
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import Chain from "../../models/Chain";
-import { IBpList } from "../../interfaces/IBpList";
-import { Row as GlobalRow } from "../../interfaces/IGlobal";
-import { Row as ProducerRow } from "../../interfaces/IProducer";
-import { IProducerJsonRow as ProducerJsonRow } from "../../interfaces/IProducerJson";
 import utils from "../../utils";
-import { useInfo } from "../../hooks";
+import { useBpList, useInfo } from "../../hooks";
 
-export default function IndexPage() {
-  const { info, isLoading, isError } = useInfo();
-  const [bpList, setBpList] = useState<IBpList[]>([]);
-  useEffect(() => {
-    async function fetchBpList() {
-      // @ts-ignore
-      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([Chain.getProducers(), Chain.getProducerJson(), Chain.getGlobal()]);
-      const bpList = Chain.generateBpList(producers, producerJson, global);
-      setBpList(bpList);
-    }
-    fetchBpList();
-  }, []);
+const Page: NextPage = () => {
+  const { info } = useInfo();
+  const { bpList } = useBpList();
 
   return (
     <Layout title="节点列表 | FIBOS 导航">
@@ -98,4 +84,5 @@ export default function IndexPage() {
       </div>
     </Layout>
   );
-}
+};
+export default Page;

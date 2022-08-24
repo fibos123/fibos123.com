@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { useSites } from "../hooks";
 
 const Home: NextPage = () => {
-  const { sites, isLoading, isError } = useSites();
+  const { sites } = useSites();
 
   return (
     <Layout title="FIBOS 导航">
