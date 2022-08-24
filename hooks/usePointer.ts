@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { IPointerList } from "../types/IPointerList";
 import Pointer from "../models/Pointer";
+import { IPointerList } from "../types";
 
 interface IAccessPoints {
   "p2p-peer-address": string[];

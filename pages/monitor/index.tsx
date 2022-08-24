@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Layout from "../../components/Layout";
 import Link from "next/link";
+import Layout from "../../components/Layout";
 import utils from "../../utils";
 import { useBpStatus } from "../../hooks";
 

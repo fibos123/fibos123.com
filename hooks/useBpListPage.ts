@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import useSWR from "swr";
 import config from "../config";
-import { IBpList } from "../types/IBpList";
-import { IInfo } from "../types/IInfo";
 import Chain from "../models/Chain";
+import { IBpList, IInfo } from "../types";
 import utils from "../utils";
 import { get } from "../utils/api";
 

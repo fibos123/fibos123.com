@@ -1,11 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import config from "../config";
-import { IBpList } from "../types/IBpList";
-import { IGlobalRow as GlobalRow } from "../types/IGlobal";
-import { IProducerRow as ProducerRow } from "../types/IProducer";
-import { IProducerJsonRow as ProducerJsonRow } from "../types/IProducerJson";
-import { IAccount } from "../types/IAccount";
+import { IAccount, IBpList, IGlobalRow, IProducerJsonRow, IProducerRow } from "../types";
 
 class Chain {
   static votesToStaked = (totalVotes: number): number => {
@@ -16,7 +12,7 @@ class Chain {
     return Math.round(r);
   };
 
-  static getClaimRewards = (producer: ProducerRow, global: GlobalRow, rank: number) => {
+  static getClaimRewards = (producer: IProducerRow, global: IGlobalRow, rank: number) => {
     if (!global.perblock_bucket) {
       return {
         total: 0,
@@ -36,7 +32,7 @@ class Chain {
     };
   };
 
-  static getGlobal = async (): Promise<GlobalRow> => {
+  static getGlobal = async (): Promise<IGlobalRow> => {
     const response = await axios.post(
       config.rpc_get_table_rows,
       JSON.stringify({
@@ -51,7 +47,7 @@ class Chain {
     return data;
   };
 
-  static getProducers = async (): Promise<ProducerRow[]> => {
+  static getProducers = async (): Promise<IProducerRow[]> => {
     const response = await axios.post(
       config.rpc_get_table_rows,
       JSON.stringify({
@@ -68,7 +64,7 @@ class Chain {
     return data;
   };
 
-  static getProducerJson = async (): Promise<ProducerJsonRow[]> => {
+  static getProducerJson = async (): Promise<IProducerJsonRow[]> => {
     const response = await axios.post(
       config.rpc_get_table_rows,
       JSON.stringify({
@@ -89,7 +85,7 @@ class Chain {
     return data;
   };
 
-  static generateBpList(producers: ProducerRow[], producerJson: ProducerJsonRow[], global: GlobalRow): IBpList[] {
+  static generateBpList(producers: IProducerRow[], producerJson: IProducerJsonRow[], global: IGlobalRow): IBpList[] {
     let bpList: IBpList[] = [];
 
     producers.forEach((item) => {

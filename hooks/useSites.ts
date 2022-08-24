@@ -1,7 +1,7 @@
 import _ from "lodash";
 import useSWR from "swr";
 import config from "../config";
-import { ISite } from "../types/ISite";
+import { ISite } from "../types";
 import { post } from "../utils/api";
 
 export const useSites = () => {

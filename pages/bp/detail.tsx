@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
-import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Layout from "../../components/Layout";
 import { useBpDetail } from "../../hooks";
 
 const Page: NextPage = () => {

@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import utils from "../../utils";
-import Link from "next/link";
 import { usePointer } from "../../hooks";
 
 const linkIcon =
