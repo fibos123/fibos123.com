@@ -1,9 +1,9 @@
 export interface IProducer {
-  rows: Row[];
+  rows: IProducerRow[];
   more: boolean;
 }
 
-export interface Row {
+export interface IProducerRow {
   owner: string;
   total_votes: string;
   producer_key: string;

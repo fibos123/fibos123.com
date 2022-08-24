@@ -1,24 +1,24 @@
 export interface ISite {
   icon: string;
   name: string;
-  sub: Sub[];
+  sub: ISiteSub[];
 }
 
-export interface Sub {
+export interface ISiteSub {
   name: string;
-  child: Child[];
+  child: ISiteChild[];
   icon?: string;
 }
 
-export interface Child {
+export interface ISiteChild {
   name: string;
   desc: string;
   url: string;
   icon?: string;
-  more?: More;
+  more?: ISiteMore;
 }
 
-export interface More {
+export interface ISiteMore {
   icon?: string;
   name: string;
   url: string;

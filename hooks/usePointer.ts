@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { IPointerList } from "../interfaces/IPointerList";
+import { IPointerList } from "../types/IPointerList";
 import Pointer from "../models/Pointer";
 
 interface IAccessPoints {

@@ -1,11 +1,11 @@
 import axios from "axios";
 import _ from "lodash";
 import config from "../config";
-import { IBpList } from "../interfaces/IBpList";
-import { Row as GlobalRow } from "../interfaces/IGlobal";
-import { Row as ProducerRow } from "../interfaces/IProducer";
-import { IProducerJsonRow as ProducerJsonRow } from "../interfaces/IProducerJson";
-import { IAccount } from "../interfaces/IAccount";
+import { IBpList } from "../types/IBpList";
+import { IGlobalRow as GlobalRow } from "../types/IGlobal";
+import { IProducerRow as ProducerRow } from "../types/IProducer";
+import { IProducerJsonRow as ProducerJsonRow } from "../types/IProducerJson";
+import { IAccount } from "../types/IAccount";
 
 class Chain {
   static votesToStaked = (totalVotes: number): number => {

@@ -8,23 +8,23 @@ export interface IAccount {
   ram_quota: number;
   net_weight: number;
   cpu_weight: number;
-  net_limit: NetLimit;
-  cpu_limit: CpuLimit;
+  net_limit: IAccountNetLimit;
+  cpu_limit: IAccountCpuLimit;
   ram_usage: number;
   permissions: Permission[];
-  total_resources: TotalResources;
-  self_delegated_bandwidth: SelfDelegatedBandwidth;
+  total_resources: IAccountTotalResources;
+  self_delegated_bandwidth: IAccountSelfDelegatedBandwidth;
   refund_request: any;
-  voter_info: VoterInfo;
+  voter_info: IAccountVoterInfo;
 }
 
-export interface NetLimit {
+export interface IAccountNetLimit {
   used: number;
   available: number;
   max: number;
 }
 
-export interface CpuLimit {
+export interface IAccountCpuLimit {
   used: number;
   available: number;
   max: number;
@@ -33,36 +33,36 @@ export interface CpuLimit {
 export interface Permission {
   perm_name: string;
   parent: string;
-  required_auth: RequiredAuth;
+  required_auth: IAccountRequiredAuth;
 }
 
-export interface RequiredAuth {
+export interface IAccountRequiredAuth {
   threshold: number;
-  keys: Key[];
+  keys: IAccountKey[];
   accounts: any[];
   waits: any[];
 }
 
-export interface Key {
+export interface IAccountKey {
   key: string;
   weight: number;
 }
 
-export interface TotalResources {
+export interface IAccountTotalResources {
   owner: string;
   net_weight: string;
   cpu_weight: string;
   ram_bytes: number;
 }
 
-export interface SelfDelegatedBandwidth {
+export interface IAccountSelfDelegatedBandwidth {
   from: string;
   to: string;
   net_weight: string;
   cpu_weight: string;
 }
 
-export interface VoterInfo {
+export interface IAccountVoterInfo {
   owner: string;
   proxy: string;
   producers: any[];

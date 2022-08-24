@@ -1,30 +1,30 @@
 export interface IBpJson {
   producer_account_name: string;
   org: any[];
-  nodes: Node[];
+  nodes: IBpJsonNode[];
 }
 
-export interface Org {
+export interface IBpJsonOrg {
   candidate_name: string;
   website: string;
   email: string;
-  branding: Branding;
-  location: Location;
+  branding: IBpJsonBranding;
+  location: IBpJsonLocation;
 }
 
-export interface Branding {
+export interface IBpJsonBranding {
   logo_256: string;
 }
 
-export interface Location {
+export interface IBpJsonLocation {
   name: string;
   country: string;
   latitude: number;
   longitude: number;
 }
 
-export interface Node {
-  location: Location2;
+export interface IBpJsonNode {
+  location: IBpJsonLocation2;
   node_type: string;
   p2p_endpoint?: string;
   api_endpoint?: string;
@@ -32,7 +32,7 @@ export interface Node {
   bnet_endpoint?: string;
 }
 
-export interface Location2 {
+export interface IBpJsonLocation2 {
   name: string;
   country: string;
   latitude: number;

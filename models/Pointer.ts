@@ -1,6 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
-import { IPointerList } from "../interfaces/IPointerList";
+import { IPointerList } from "../types/IPointerList";
 import Chain from "./Chain";
 
 class Pointer {

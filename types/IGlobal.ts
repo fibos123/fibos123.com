@@ -1,9 +1,9 @@
 export interface IGlobal {
-  rows: Row[];
+  rows: IGlobalRow[];
   more: boolean;
 }
 
-export interface Row {
+export interface IGlobalRow {
   max_block_net_usage: number;
   target_block_net_usage_pct: number;
   max_transaction_net_usage: number;

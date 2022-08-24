@@ -1,4 +1,4 @@
-import { Row as ProducerRow } from "./IProducer";
+import { IProducerRow as ProducerRow } from "./IProducer";
 import { IBpJson } from "./IBpJson";
 
 export interface IBpList {

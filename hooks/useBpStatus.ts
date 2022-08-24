@@ -1,7 +1,7 @@
 import _ from "lodash";
 import useSWR from "swr";
 import config from "../config";
-import { IBpStatus } from "../interfaces/IBpStatus";
+import { IBpStatus } from "../types/IBpStatus";
 import utils from "../utils";
 import { get } from "../utils/api";
 

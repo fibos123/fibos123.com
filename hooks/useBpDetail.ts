@@ -1,12 +1,6 @@
-import _ from "lodash";
-import error from "next/error";
 import { useState, useEffect } from "react";
-import useSWR from "swr";
-import config from "../config";
-import { IBpStatus } from "../interfaces/IBpStatus";
 import Chain from "../models/Chain";
 import utils from "../utils";
-import { get } from "../utils/api";
 
 interface Detail {
   title: string;

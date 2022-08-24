@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Layout from "../components/Layout";
 import { useSites } from "../hooks";
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
   const { sites } = useSites();
 
   return (
@@ -78,4 +78,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Page;
