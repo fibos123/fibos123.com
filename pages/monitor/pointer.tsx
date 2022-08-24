@@ -1,51 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "../../components/Layout";
-import { IPointerList } from "../../interfaces/IPointerList";
-import Pointer from "../../models/Pointer";
-import _ from "lodash";
 import utils from "../../utils";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import { usePointer } from "../../hooks";
 
-const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 const linkIcon =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>';
 
-interface AccessPoints {
-  "p2p-peer-address": string[];
-  "http-api-address": string[];
-  "https-api-address": string[];
-}
-
 export default function IndexPage() {
-  const [accessPoints, setAccessPoints] = useState<object>();
-  const [pointerList, setPointerList] = useState<IPointerList[]>([]);
+  const { accessPoints, pointerList, isLoading, isError } = usePointer();
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {
-    const pointer = new Pointer();
-    pointer.getProducerJson();
-
-    async function fetchData() {
-      const data = pointer.list;
-      setPointerList(data);
-      let accessPoints: AccessPoints = {
-        "p2p-peer-address": [],
-        "http-api-address": [],
-        "https-api-address": [],
-      };
-      const successList = data.filter((item) => item.status === "success");
-      accessPoints["p2p-peer-address"] = _.union(successList.filter((item) => item.p2p_endpoint).map((item) => item.p2p_endpoint));
-
-      accessPoints["http-api-address"] = _.union(successList.filter((item) => item.api_endpoint).map((item) => item.api_endpoint));
-
-      accessPoints["https-api-address"] = _.union(successList.filter((item) => item.ssl_endpoint).map((item) => item.ssl_endpoint));
-
-      setAccessPoints(accessPoints);
-    }
-    fetchData();
-    let timer = setInterval(fetchData, 100);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <Layout title="节点监控 | FIBOS 导航">
@@ -78,35 +42,36 @@ export default function IndexPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-slate-100">
-                  {pointerList.map((item, index) => (
-                    <tr key={index} className="hover:bg-slate-200">
-                      <td className=" text-slate-500">{index + 1}</td>
-                      <td>
-                        <div className="flex items-center">
-                          <div className="text-slate-900">{item.owner}</div>
-                        </div>
-                      </td>
-                      <td>
-                        {
+                  {pointerList &&
+                    pointerList.map((item, index) => (
+                      <tr key={index} className="hover:bg-slate-200">
+                        <td className=" text-slate-500">{index + 1}</td>
+                        <td>
+                          <div className="flex items-center">
+                            <div className="text-slate-900">{item.owner}</div>
+                          </div>
+                        </td>
+                        <td>
                           {
-                            waiting: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">获取中</span>,
-                            success: (
-                              <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                {utils.formatNumber(item.number)} ( {item.version} )
-                              </span>
-                            ),
-                            fail: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800">无法访问</span>,
-                            notset: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">未设置</span>,
-                          }[item.status]
-                        }
-                        {item.status !== "notset" && (
-                          <a target="_blank" href={item.ssl_endpoint + "/v1/chain/get_info"} rel="noreferrer" className="ml-4 fill-indigo-500" title="打开新窗口查看接入点">
-                            <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
-                          </a>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                            {
+                              waiting: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">获取中</span>,
+                              success: (
+                                <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                  {utils.formatNumber(item.number)} ( {item.version} )
+                                </span>
+                              ),
+                              fail: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800">无法访问</span>,
+                              notset: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">未设置</span>,
+                            }[item.status]
+                          }
+                          {item.status !== "notset" && (
+                            <a target="_blank" href={item.ssl_endpoint + "/v1/chain/get_info"} rel="noreferrer" className="ml-4 fill-indigo-500" title="打开新窗口查看接入点">
+                              <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
+                            </a>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -123,7 +88,7 @@ export default function IndexPage() {
               <div className="bg-white px-4 pt-5">
                 <h3 className="text-lg leading-6 font-medium text-slate-900 pb-2">可用接入点列表</h3>
                 <div className="sm:flex sm:items-start">
-                  <pre className="h-64 w-full overflow-auto text-sm">{accessPoints !== undefined && <ReactJson src={accessPoints} displayDataTypes={false} />}</pre>
+                  <pre className="h-64 w-full overflow-auto text-sm">{JSON.stringify(accessPoints, null, 2)}</pre>
                 </div>
               </div>
               <div className="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

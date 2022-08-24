@@ -1,9 +1,9 @@
 export interface IProducerJson {
-  rows: Row[];
+  rows: IProducerJsonRow[];
   more: boolean;
 }
 
-export interface Row {
+export interface IProducerJsonRow {
   owner: string;
   json: string;
 }

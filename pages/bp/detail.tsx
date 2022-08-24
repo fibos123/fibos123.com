@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Chain from "../../models/Chain";
 import { Row as GlobalRow } from "../../interfaces/IGlobal";
 import { Row as ProducerRow } from "../../interfaces/IProducer";
-import { Row as ProducerJsonRow } from "../../interfaces/IProducerJson";
+import { IProducerJsonRow as ProducerJsonRow } from "../../interfaces/IProducerJson";
 import _ from "lodash";
 import utils from "../../utils";
 
