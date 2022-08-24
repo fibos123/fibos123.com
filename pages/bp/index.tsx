@@ -2,11 +2,10 @@ import type { NextPage } from "next";
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import utils from "../../utils";
-import { useBpList, useInfo } from "../../hooks";
+import { useBpListPage } from "../../hooks";
 
 const Page: NextPage = () => {
-  const { info } = useInfo();
-  const { bpList } = useBpList();
+  const { info, bpList } = useBpListPage();
 
   return (
     <Layout title="节点列表 | FIBOS 导航">

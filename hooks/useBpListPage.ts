@@ -1,7 +1,9 @@
-import _ from "lodash";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import config from "../config";
+import { IBpList } from "../interfaces/IBpList";
 import { IInfo } from "../interfaces/IInfo";
+import Chain from "../models/Chain";
 import utils from "../utils";
 import { get } from "../utils/api";
 
@@ -35,4 +37,25 @@ export const useBpInfo = () => {
     isLoading: error && !data,
     isError: error,
   };
+};
+
+export const useBpList = () => {
+  const [bpList, setBpList] = useState<IBpList[]>([]);
+  useEffect(() => {
+    async function fetchBpList() {
+      // @ts-ignore
+      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([Chain.getProducers(), Chain.getProducerJson(), Chain.getGlobal()]);
+      const bpList = Chain.generateBpList(producers, producerJson, global);
+      setBpList(bpList);
+    }
+    fetchBpList();
+  }, []);
+  return { bpList };
+};
+
+export const useBpListPage = () => {
+  const { info } = useBpInfo();
+  const { bpList } = useBpList();
+
+  return { info, bpList };
 };
