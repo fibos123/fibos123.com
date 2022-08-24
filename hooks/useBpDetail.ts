@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Chain from "../models/Chain";
 import utils from "../utils";
 
-interface Detail {
+interface IDetail {
   title: string;
   list: {
     key: string;
@@ -11,7 +11,7 @@ interface Detail {
 }
 
 export const useBpDetail = (account: string) => {
-  const [detail, setDetail] = useState<Detail[]>([]);
+  const [detail, setDetail] = useState<IDetail[]>([]);
 
   useEffect(() => {
     async function fetchDetail() {
@@ -31,7 +31,7 @@ export const useBpDetail = (account: string) => {
         return;
       }
 
-      let detail: Detail[] = [
+      let detail: IDetail[] = [
         {
           title: "基本信息",
           list: [
@@ -100,26 +100,26 @@ export const useBpDetail = (account: string) => {
           list2.push({
             key: "producer",
             value: `国家或地区：
-  ${producer.location.name}, ${producer.location.country}`,
+${producer.location.name}, ${producer.location.country}`,
           });
         }
         if (full) {
           list2.push({
             key: "full",
             value: `国家或地区：
-  ${full.location.name}, ${full.location.country}
-  接入点地址：
-  ${full.api_endpoint}
-  ${full.ssl_endpoint}`,
+${full.location.name}, ${full.location.country}
+接入点地址：
+${full.api_endpoint}
+${full.ssl_endpoint}`,
           });
         }
         if (seed) {
           list2.push({
             key: "seed",
             value: `国家或地区：
-  ${seed.location.name}, ${seed.location.country}
-  接入点地址：
-  ${seed.p2p_endpoint}`,
+${seed.location.name}, ${seed.location.country}
+接入点地址：
+${seed.p2p_endpoint}`,
           });
         }
         detail.push({
