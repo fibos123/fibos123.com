@@ -1,7 +1,7 @@
-import Layout from '../components/Layout'
+import type { NextPage } from "next";
+import Layout from "../components/Layout";
 
-export default function IndexPage() {
-
+const About: NextPage = () => {
   return (
     <Layout title="BP 信息 | FIBOS 导航" mode="dark">
       <div className="p-6 flex items-center justify-center h-full">
@@ -35,10 +35,14 @@ export default function IndexPage() {
           <p>
             <b className="pr-2">品牌标识</b>
             <span className="pr-2">
-              <a href="/logo.svg" target="_blank" className="underline">SVG</a>
+              <a href="/logo.svg" target="_blank" className="underline">
+                SVG
+              </a>
             </span>
             <span className="pr-2">
-              <a href="/public/images/logo_256.png" target="_blank" className="underline">PNG</a>
+              <a href="/public/images/logo_256.png" target="_blank" className="underline">
+                PNG
+              </a>
             </span>
           </p>
 
@@ -47,5 +51,7 @@ export default function IndexPage() {
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
+
+export default About;

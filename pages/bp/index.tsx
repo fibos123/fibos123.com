@@ -7,60 +7,19 @@ import { Row as GlobalRow } from "../../interfaces/IGlobal";
 import { Row as ProducerRow } from "../../interfaces/IProducer";
 import { Row as ProducerJsonRow } from "../../interfaces/IProducerJson";
 import utils from "../../utils";
+import { useInfo } from "../../hooks";
 
 export default function IndexPage() {
-  const [cardList, setCardList] = useState([
-    {
-      name: "生产者",
-      value: "",
-    },
-    {
-      name: "出块时间",
-      value: "",
-    },
-    {
-      name: "最新区块",
-      value: "",
-    },
-    {
-      name: "不可逆区块",
-      value: "",
-    },
-  ]);
+  const { info, isLoading, isError } = useInfo();
   const [bpList, setBpList] = useState<IBpList[]>([]);
   useEffect(() => {
-    async function fetchCardList() {
-      const data = await Chain.getInfo();
-      const cardList = [
-        {
-          name: "生产者",
-          value: data.head_block_producer,
-        },
-        {
-          name: "出块时间",
-          value: utils.formatDate(data.head_block_time + "Z"),
-        },
-        {
-          name: "最新区块",
-          value: utils.formatNumber(data.head_block_num),
-        },
-        {
-          name: "不可逆区块",
-          value: utils.formatNumber(data.last_irreversible_block_num),
-        },
-      ];
-      setCardList(cardList);
-    }
     async function fetchBpList() {
       // @ts-ignore
       const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([Chain.getProducers(), Chain.getProducerJson(), Chain.getGlobal()]);
       const bpList = Chain.generateBpList(producers, producerJson, global);
       setBpList(bpList);
     }
-    fetchCardList();
     fetchBpList();
-    let timer = setInterval(fetchCardList, 1000);
-    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -70,12 +29,13 @@ export default function IndexPage() {
           <div className="text-2xl pb-4">节点列表</div>
 
           <div className="flex flex-wrap gap-4 text-center">
-            {cardList.map((item) => (
-              <div key={item.name} className="flex-1 rounded bg-white p-4">
-                <h2 className="text-slate-500">{item.name}</h2>
-                <div className="text-lg h-6 whitespace-no-wrap">{item.value}</div>
-              </div>
-            ))}
+            {info &&
+              info.map((item) => (
+                <div key={item.name} className="flex-1 rounded bg-white p-4">
+                  <h2 className="text-slate-500">{item.name}</h2>
+                  <div className="text-lg h-6 whitespace-no-wrap">{item.value}</div>
+                </div>
+              ))}
           </div>
         </div>
         <div className="px-6 bg-white mt-6">

@@ -3,7 +3,6 @@ import _ from "lodash";
 import config from "../config";
 import { IBpList } from "../interfaces/IBpList";
 import { Row as GlobalRow } from "../interfaces/IGlobal";
-import { IInfo } from "../interfaces/IInfo";
 import { Row as ProducerRow } from "../interfaces/IProducer";
 import { Row as ProducerJsonRow } from "../interfaces/IProducerJson";
 import { IAccount } from "../interfaces/IAccount";
@@ -35,12 +34,6 @@ class Chain {
       total: Math.round(total),
       unreceived: Math.round(unreceived),
     };
-  };
-
-  static getInfo = async (): Promise<IInfo> => {
-    const response = await axios.get(config.rpc_get_info);
-    const data = _.get(response, "data", {});
-    return data;
   };
 
   static getGlobal = async (): Promise<GlobalRow> => {
