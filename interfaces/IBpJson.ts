@@ -1,4 +1,4 @@
-export interface BpJson {
+export interface IBpJson {
   producer_account_name: string;
   org: any[];
   nodes: Node[];

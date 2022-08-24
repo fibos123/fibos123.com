@@ -4,7 +4,7 @@ import Link from "next/link";
 import axios from "axios";
 import _ from "lodash";
 import config from "../../config";
-import { BpStatus } from "../../interfaces/BpStatus";
+import { IBpStatus } from "../../interfaces/IBpStatus";
 import utils from "../../utils";
 
 export default function IndexPage() {
@@ -22,11 +22,11 @@ export default function IndexPage() {
       value: "",
     },
   ]);
-  const [bpStatus, setBpStatus] = useState<BpStatus>();
+  const [bpStatus, setBpStatus] = useState<IBpStatus>();
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(config.api_bp_status);
-      const data: BpStatus = _.get(response, "data", {});
+      const data: IBpStatus = _.get(response, "data", {});
       const cardList = [
         {
           name: "生产者",
@@ -58,9 +58,7 @@ export default function IndexPage() {
               <a className="bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">出块节点在线状态</a>
             </Link>
             <Link href="/monitor/pointer">
-              <a className="ml-4 text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
-                接入点状态监测
-              </a>
+              <a className="ml-4 text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">接入点状态监测</a>
             </Link>
           </div>
 

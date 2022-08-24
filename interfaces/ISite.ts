@@ -1,4 +1,4 @@
-export interface Site {
+export interface ISite {
   icon: string;
   name: string;
   sub: Sub[];

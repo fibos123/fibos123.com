@@ -1,4 +1,4 @@
-export interface BpStatus {
+export interface IBpStatus {
   rows: any[];
   rows2: Rows2[];
   head_block_num: number;

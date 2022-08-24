@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Chain from "../../models/Chain";
-import { Row as GlobalRow } from "../../interfaces/Global";
-import { Row as ProducerRow } from "../../interfaces/Producer";
-import { Row as ProducerJsonRow } from "../../interfaces/ProducerJson";
+import { Row as GlobalRow } from "../../interfaces/IGlobal";
+import { Row as ProducerRow } from "../../interfaces/IProducer";
+import { Row as ProducerJsonRow } from "../../interfaces/IProducerJson";
 import _ from "lodash";
 import utils from "../../utils";
 
@@ -31,11 +31,7 @@ export default function IndexPage() {
       const accountInfo = await Chain.getAccount(account);
 
       // @ts-ignore
-      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([
-        Chain.getProducers(),
-        Chain.getProducerJson(),
-        Chain.getGlobal(),
-      ]);
+      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([Chain.getProducers(), Chain.getProducerJson(), Chain.getGlobal()]);
 
       const bpList = Chain.generateBpList(producers, producerJson, global);
       const bp = bpList.find((item) => item.owner === account);

@@ -1,4 +1,4 @@
-export interface Global {
+export interface IGlobal {
   rows: Row[];
   more: boolean;
 }

@@ -1,4 +1,4 @@
-export interface Producer {
+export interface IProducer {
   rows: Row[];
   more: boolean;
 }

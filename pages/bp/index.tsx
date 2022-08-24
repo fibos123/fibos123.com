@@ -2,10 +2,10 @@ import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Chain from "../../models/Chain";
-import { BpList } from "../../interfaces/BpList";
-import { Row as GlobalRow } from "../../interfaces/Global";
-import { Row as ProducerRow } from "../../interfaces/Producer";
-import { Row as ProducerJsonRow } from "../../interfaces/ProducerJson";
+import { IBpList } from "../../interfaces/IBpList";
+import { Row as GlobalRow } from "../../interfaces/IGlobal";
+import { Row as ProducerRow } from "../../interfaces/IProducer";
+import { Row as ProducerJsonRow } from "../../interfaces/IProducerJson";
 import utils from "../../utils";
 
 export default function IndexPage() {
@@ -27,7 +27,7 @@ export default function IndexPage() {
       value: "",
     },
   ]);
-  const [bpList, setBpList] = useState<BpList[]>([]);
+  const [bpList, setBpList] = useState<IBpList[]>([]);
   useEffect(() => {
     async function fetchCardList() {
       const data = await Chain.getInfo();
@@ -53,11 +53,7 @@ export default function IndexPage() {
     }
     async function fetchBpList() {
       // @ts-ignore
-      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([
-        Chain.getProducers(),
-        Chain.getProducerJson(),
-        Chain.getGlobal(),
-      ]);
+      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([Chain.getProducers(), Chain.getProducerJson(), Chain.getGlobal()]);
       const bpList = Chain.generateBpList(producers, producerJson, global);
       setBpList(bpList);
     }
@@ -102,9 +98,7 @@ export default function IndexPage() {
                 {bpList.map((item, index) => (
                   <tr key={index}>
                     <td className="text-slate-400 text-center">{index + 1}</td>
-                    <td className="px-2 py-2 text-center">
-                      {item.logo && <span className="h-12 w-12 block bg-cover mx-auto" style={{ backgroundImage: "url(" + item.logo + ")" }}></span>}
-                    </td>
+                    <td className="px-2 py-2 text-center">{item.logo && <span className="h-12 w-12 block bg-cover mx-auto" style={{ backgroundImage: "url(" + item.logo + ")" }}></span>}</td>
                     <td>
                       <div>{item.candidate_name}</div>
                       <div className="text-slate-400">{item.owner}</div>
@@ -122,16 +116,9 @@ export default function IndexPage() {
                       <div className="text-slate-400 text-sm">{utils.formatNumber(item.staked)} FO</div>
                     </td>
                     <td className="text-slate-400">{utils.formatNumber(item.claim_rewards_total)} FO</td>
-                    <td className={"" + (item.claim_rewards_unreceived ? "text-green-500 font-bold" : "text-slate-400")}>
-                      {utils.formatNumber(item.claim_rewards_unreceived)} FO
-                    </td>
+                    <td className={"" + (item.claim_rewards_unreceived ? "text-green-500 font-bold" : "text-slate-400")}>{utils.formatNumber(item.claim_rewards_unreceived)} FO</td>
                     <td className="text-slate-400">
-                      <a
-                        href={item.urlFull}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out"
-                      >
+                      <a href={item.urlFull} target="_blank" rel="noreferrer" className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">
                         {item.urlSimple}
                       </a>
                     </td>

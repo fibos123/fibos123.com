@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import { PointerList } from "../../interfaces/PointerList";
+import { IPointerList } from "../../interfaces/IPointerList";
 import Pointer from "../../models/Pointer";
 import _ from "lodash";
 import utils from "../../utils";
@@ -19,7 +19,7 @@ interface AccessPoints {
 
 export default function IndexPage() {
   const [accessPoints, setAccessPoints] = useState<object>();
-  const [pointerList, setPointerList] = useState<PointerList[]>([]);
+  const [pointerList, setPointerList] = useState<IPointerList[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const pointer = new Pointer();
@@ -53,9 +53,7 @@ export default function IndexPage() {
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
-              <a className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
-                出块节点在线状态
-              </a>
+              <a className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">出块节点在线状态</a>
             </Link>
             <Link href="/monitor/pointer">
               <a className="ml-4 bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">接入点状态监测</a>
@@ -102,13 +100,7 @@ export default function IndexPage() {
                           }[item.status]
                         }
                         {item.status !== "notset" && (
-                          <a
-                            target="_blank"
-                            href={item.ssl_endpoint + "/v1/chain/get_info"}
-                            rel="noreferrer"
-                            className="ml-4 fill-indigo-500"
-                            title="打开新窗口查看接入点"
-                          >
+                          <a target="_blank" href={item.ssl_endpoint + "/v1/chain/get_info"} rel="noreferrer" className="ml-4 fill-indigo-500" title="打开新窗口查看接入点">
                             <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
                           </a>
                         )}
@@ -131,9 +123,7 @@ export default function IndexPage() {
               <div className="bg-white px-4 pt-5">
                 <h3 className="text-lg leading-6 font-medium text-slate-900 pb-2">可用接入点列表</h3>
                 <div className="sm:flex sm:items-start">
-                  <pre className="h-64 w-full overflow-auto text-sm">
-                    {accessPoints !== undefined && <ReactJson src={accessPoints} displayDataTypes={false} />}
-                  </pre>
+                  <pre className="h-64 w-full overflow-auto text-sm">{accessPoints !== undefined && <ReactJson src={accessPoints} displayDataTypes={false} />}</pre>
                 </div>
               </div>
               <div className="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
