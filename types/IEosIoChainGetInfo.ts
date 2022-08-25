@@ -1,4 +1,4 @@
-export interface IInfo {
+export interface IEosIoChainGetInfo {
   server_version: string;
   chain_id: string;
   head_block_num: number;

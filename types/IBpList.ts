@@ -1,4 +1,4 @@
-import { IProducerRow as ProducerRow } from "./IProducer";
+import { IEosIoChainGetProducers } from "./IEosIoChainGetProducers";
 import { IBpJson } from "./IBpJson";
 
 export interface IBpList {
@@ -11,6 +11,6 @@ export interface IBpList {
   weight_percent: number;
   urlFull: string;
   urlSimple: string;
-  producer: ProducerRow;
+  producer: IEosIoChainGetProducers;
   json: IBpJson | undefined;
 }

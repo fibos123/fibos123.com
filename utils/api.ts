@@ -17,4 +17,4 @@ export const fetcherPost = async (url: string, data: any) => {
   return response.json();
 };
 
-export const post = (params: any) => (url: string) => fetcherPost(url, params);
+export const post = (url: string, params: any) => (key: string) => fetcherPost(url, params);

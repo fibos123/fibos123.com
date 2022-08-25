@@ -1,9 +1,7 @@
-import useSWR from "swr";
-import config from "../config";
-import { ISite, ISiteWrap } from "../types";
-import { post } from "../utils/api";
+import { useEosIoChainGetTableRows } from ".";
+import { ISite, ISiteWrapRow } from "../types";
 
-export const useSites = () => {
+export const useSites = (refresh = false) => {
   const body = {
     json: "true",
     code: "fibos123comc",
@@ -13,18 +11,18 @@ export const useSites = () => {
     lower_bound: "sites",
   };
 
-  let { data, error } = useSWR<ISiteWrap>(config.rpc_get_table_rows, post(body));
+  const { data, isLoading, isError } = useEosIoChainGetTableRows<ISiteWrapRow>(body, refresh);
 
   let sites: ISite[] = [];
 
-  if (data && !error) {
+  if (data && !isError) {
     const string = data?.rows[0]?.text || "[]";
     sites = JSON.parse(string) as ISite[];
   }
 
   return {
     sites,
-    isLoading: error && !data,
-    isError: error,
+    isLoading,
+    isError,
   };
 };

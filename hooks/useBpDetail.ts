@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useEosIoChainGetAccount, useEosIoChainGetGlobal, useEosIoChainGetProducerJson, useEosIoChainGetProducers } from ".";
 import Chain from "../models/Chain";
 import utils from "../utils";
 
@@ -10,22 +11,21 @@ interface IDetail {
   }[];
 }
 
-export const useBpDetail = (account: string) => {
+export const useBpDetail = (account_name: string) => {
   const [detail, setDetail] = useState<IDetail[]>([]);
+  const { account } = useEosIoChainGetAccount(account_name);
+  const { global } = useEosIoChainGetGlobal();
+  const { producers } = useEosIoChainGetProducers();
+  const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
     async function fetchDetail() {
-      if (!account || "string" !== typeof account) {
-        console.error("not account");
+      if (!account || !global || !producers || !producerJson) {
         return;
       }
-      const accountInfo = await Chain.getAccount(account);
-
-      // @ts-ignore
-      const [producers, producerJson, global] = await Promise.all<[ProducerRow[], ProducerJsonRow[], GlobalRow]>([Chain.getProducers(), Chain.getProducerJson(), Chain.getGlobal()]);
 
       const bpList = Chain.generateBpList(producers, producerJson, global);
-      const bp = bpList.find((item) => item.owner === account);
+      const bp = bpList.find((item) => item.owner === account_name);
       if (!bp) {
         console.log("not bp");
         return;
@@ -37,11 +37,11 @@ export const useBpDetail = (account: string) => {
           list: [
             {
               key: "创建时间",
-              value: utils.formatDate(accountInfo.created + "Z"),
+              value: utils.formatDate(account.created + "Z"),
             },
             {
               key: "排名",
-              value: (bpList.findIndex((item) => item.owner === account) + 1).toString(),
+              value: (bpList.findIndex((item) => item.owner === account_name) + 1).toString(),
             },
             {
               key: "得票率",
@@ -140,7 +140,7 @@ ${seed.p2p_endpoint}`,
       setDetail(detail);
     }
     fetchDetail();
-  }, [account]);
+  }, [account_name, account, global, producers, producerJson]);
 
   return {
     detail,

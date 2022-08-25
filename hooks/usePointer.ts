@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Pointer from "../models/Pointer";
 import { IPointerList } from "../types";
+import { useEosIoChainGetProducerJson } from "./useEosIoChainGetProducerJson";
 
 interface IAccessPoints {
   "p2p-peer-address": string[];
@@ -11,10 +12,11 @@ interface IAccessPoints {
 export const usePointer = () => {
   const [accessPoints, setAccessPoints] = useState<IAccessPoints>();
   const [pointerList, setPointerList] = useState<IPointerList[]>([]);
+  const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
     const pointer = new Pointer();
-    pointer.getProducerJson();
+    pointer.getProducerJson(producerJson);
 
     async function fetchData() {
       const data = pointer.list;
@@ -37,7 +39,7 @@ export const usePointer = () => {
     fetchData();
     let timer = setInterval(fetchData, 100);
     return () => clearInterval(timer);
-  }, []);
+  }, [producerJson]);
 
   return {
     accessPoints,

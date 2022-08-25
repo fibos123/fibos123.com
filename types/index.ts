@@ -1,10 +1,11 @@
-export type { IAccount } from "./IAccount";
 export type { IBpJson } from "./IBpJson";
 export type { IBpList } from "./IBpList";
 export type { IBpStatus } from "./IBpStatus";
-export type { IGlobal, IGlobalRow } from "./IGlobal";
+export type { IEosIoChainGetGlobal } from "./IEosIoChainGetGlobal";
 export type { IPointerList } from "./IPointerList";
-export type { IProducer, IProducerRow } from "./IProducer";
-export type { IProducerJson, IProducerJsonRow } from "./IProducerJson";
-export type { ISite, ISiteWrap } from "./ISite";
-export type { IInfo } from "./IInfo";
+export type { IEosIoChainGetProducers } from "./IEosIoChainGetProducers";
+export type { IEosIoChainGetProducerJson } from "./IEosIoChainGetProducerJson";
+export type { ISite, ISiteWrap, ISiteWrapRow } from "./ISite";
+export type { IEosIoChainGetAccount } from "./IEosIoChainGetAccount";
+export type { IEosIoChainGetInfo } from "./IEosIoChainGetInfo";
+export type { IEosIoChainGetTableRows } from "./IEosIoChainGetTableRows";

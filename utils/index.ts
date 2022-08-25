@@ -8,15 +8,24 @@ const formatPercent = (num: number): string => {
 
 const formatDate = (value: string | number): string => {
   let date;
+  let dateString = "";
+  if (!value) {
+    return "";
+  }
+
   if ("string" === typeof value) {
     const isZChar = value.toString().slice(-1) === "Z";
     if (!isZChar) {
       value = value + "Z";
     }
   }
-  date = new Date(value);
+  try {
+    date = new Date(value);
+    dateString = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(date);
+  } catch (error) {
+    console.log(value, error);
+  }
 
-  const dateString = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(date);
   return dateString;
 };
 

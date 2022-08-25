@@ -1,9 +1,4 @@
-export interface IProducer {
-  rows: IProducerRow[];
-  more: boolean;
-}
-
-export interface IProducerRow {
+export interface IEosIoChainGetProducers {
   owner: string;
   total_votes: string;
   producer_key: string;

@@ -1,6 +1,4 @@
-import { fetcherPost } from "../utils/api";
-import config from "../config";
-import { IAccount, IBpList, IGlobalRow, IProducerJsonRow, IProducerRow } from "../types";
+import { IBpList, IEosIoChainGetGlobal, IEosIoChainGetProducerJson, IEosIoChainGetProducers } from "../types";
 
 class Chain {
   static votesToStaked = (totalVotes: number): number => {
@@ -11,7 +9,7 @@ class Chain {
     return Math.round(r);
   };
 
-  static getClaimRewards = (producer: IProducerRow, global: IGlobalRow, rank: number) => {
+  static getClaimRewards = (producer: IEosIoChainGetProducers, global: IEosIoChainGetGlobal, rank: number) => {
     if (!global.perblock_bucket) {
       return {
         total: 0,
@@ -31,51 +29,7 @@ class Chain {
     };
   };
 
-  static getGlobal = async (): Promise<IGlobalRow> => {
-    const response = await fetcherPost(config.rpc_get_table_rows, {
-      code: "eosio",
-      json: true,
-      limit: 1,
-      scope: "eosio",
-      table: "global",
-    });
-    const data = response?.rows[0] || {};
-    return data;
-  };
-
-  static getProducers = async (): Promise<IProducerRow[]> => {
-    const response = await fetcherPost(config.rpc_get_table_rows, {
-      scope: "eosio",
-      code: "eosio",
-      table: "producers",
-      json: true,
-      limit: 100,
-      key_type: "float64",
-      index_position: 2,
-    });
-    const data = response?.rows || [];
-    return data;
-  };
-
-  static getProducerJson = async (): Promise<IProducerJsonRow[]> => {
-    const response = await fetcherPost(config.rpc_get_table_rows, {
-      json: true,
-      code: "producerjson",
-      scope: "producerjson",
-      table: "producerjson",
-      limit: 1000,
-    });
-    const data = response?.rows || [];
-    return data;
-  };
-
-  static getAccount = async (account_name: string): Promise<IAccount> => {
-    const response = await fetcherPost(config.rpc_get_account, { account_name });
-    const data = response;
-    return data;
-  };
-
-  static generateBpList(producers: IProducerRow[], producerJson: IProducerJsonRow[], global: IGlobalRow): IBpList[] {
+  static generateBpList(producers: IEosIoChainGetProducers[], producerJson: IEosIoChainGetProducerJson[], global: IEosIoChainGetGlobal): IBpList[] {
     let bpList: IBpList[] = [];
 
     producers.forEach((item) => {

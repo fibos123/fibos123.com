@@ -1,13 +1,11 @@
-import { IPointerList } from "../types";
+import { IEosIoChainGetProducerJson, IPointerList } from "../types";
 import { get } from "../utils/api";
-import Chain from "./Chain";
 
 class Pointer {
   point = "/v1/chain/get_info";
   list: IPointerList[] = [];
-  getProducerJson = async () => {
+  getProducerJson = async (producerJson: IEosIoChainGetProducerJson[]) => {
     this.list = [];
-    const producerJson = await Chain.getProducerJson();
     producerJson.map((item) => {
       const bp: IPointerList = {
         owner: item.owner,

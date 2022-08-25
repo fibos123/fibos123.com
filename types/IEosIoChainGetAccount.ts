@@ -1,4 +1,4 @@
-export interface IAccount {
+export interface IEosIoChainGetAccount {
   account_name: string;
   head_block_num: number;
   head_block_time: string;

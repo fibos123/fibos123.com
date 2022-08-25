@@ -1,9 +1,4 @@
-export interface IGlobal {
-  rows: IGlobalRow[];
-  more: boolean;
-}
-
-export interface IGlobalRow {
+export interface IEosIoChainGetGlobal {
   max_block_net_usage: number;
   target_block_net_usage_pct: number;
   max_transaction_net_usage: number;
