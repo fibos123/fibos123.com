@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { EndPointStatus } from "../enums";
 import Pointer from "../models/Pointer";
-import { IPointerList } from "../types";
+import { IPoints } from "../types";
 import { useEosIoChainGetProducerJson } from "./useEosIoChainGetProducerJson";
 
 interface IAccessPoints {
@@ -11,7 +12,7 @@ interface IAccessPoints {
 
 export const usePointer = () => {
   const [accessPoints, setAccessPoints] = useState<IAccessPoints>();
-  const [pointers, setPointers] = useState<IPointerList[]>([]);
+  const [points, setPoints] = useState<IPoints[]>([]);
   const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
@@ -19,21 +20,19 @@ export const usePointer = () => {
     pointer.run(producerJson);
 
     async function fetchData() {
-      const data = pointer.list;
-      setPointers(data);
-      let accessPoints: IAccessPoints = {
-        "p2p-peer-address": [],
-        "http-api-address": [],
-        "https-api-address": [],
-      };
-      const successList = data.filter((item) => item.status === "success");
+      const points = pointer.points;
+      const successList = points.filter((item) => item.status === EndPointStatus.success);
       const p2pList = successList.filter((item) => item.p2p_endpoint).map((item) => item.p2p_endpoint);
       const apiList = successList.filter((item) => item.api_endpoint).map((item) => item.api_endpoint);
       const sslList = successList.filter((item) => item.ssl_endpoint).map((item) => item.ssl_endpoint);
-      accessPoints["p2p-peer-address"] = [...new Set([...p2pList])];
-      accessPoints["http-api-address"] = [...new Set([...apiList])];
-      accessPoints["https-api-address"] = [...new Set([...sslList])];
 
+      const accessPoints: IAccessPoints = {
+        "p2p-peer-address": [...new Set([...p2pList])],
+        "http-api-address": [...new Set([...apiList])],
+        "https-api-address": [...new Set([...sslList])],
+      };
+
+      setPoints(points);
       setAccessPoints(accessPoints);
     }
     fetchData();
@@ -41,8 +40,5 @@ export const usePointer = () => {
     return () => clearInterval(timer);
   }, [producerJson]);
 
-  return {
-    accessPoints,
-    pointerList: pointers,
-  };
+  return { accessPoints, points };
 };

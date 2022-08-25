@@ -1,5 +1,5 @@
 import { EndPointStatus } from "../enums";
-import { IEosIoChainGetProducerJson, IPointerList } from "../types";
+import { IEosIoChainGetProducerJson, IPoints } from "../types";
 import { get } from "../utils";
 
 // class Status {
@@ -14,12 +14,12 @@ import { get } from "../utils";
 
 class Pointer {
   private point = "/v1/chain/get_info";
-  public list: IPointerList[] = [];
+  public points: IPoints[] = [];
 
   async run(producerJson: IEosIoChainGetProducerJson[]) {
-    this.list = [];
-    this.list = producerJson.map((item) => {
-      const bp: IPointerList = {
+    this.points = [];
+    this.points = producerJson.map((item) => {
+      const bp: IPoints = {
         owner: item.owner,
         api_endpoint: "",
         ssl_endpoint: "",
@@ -49,11 +49,8 @@ class Pointer {
 
       return bp;
     });
-    this.check();
-  }
 
-  async check() {
-    this.list
+    this.points
       .filter((item) => item.status === EndPointStatus.waiting)
       .forEach(async (item) => {
         try {
@@ -68,10 +65,10 @@ class Pointer {
         } catch (error) {
           item.status = EndPointStatus.fail;
         }
-        this.list = this.list.sort((x, y) => x.owner.localeCompare(y.owner));
-        this.list = this.list.sort((x, y) => y.status - x.status);
-        this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
-        this.list = this.list.sort((x, y) => y.number - x.number);
+        this.points = this.points.sort((x, y) => x.owner.localeCompare(y.owner));
+        this.points = this.points.sort((x, y) => y.status - x.status);
+        this.points = this.points.sort((x, y) => x.version.localeCompare(y.version));
+        this.points = this.points.sort((x, y) => y.number - x.number);
       });
   }
 }

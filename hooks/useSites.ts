@@ -1,5 +1,5 @@
 import { useEosIoChainGetTableRows } from ".";
-import { ISite, ISiteWrapRow } from "../types";
+import { ISite, ISiteRow } from "../types";
 
 export const useSites = () => {
   const body = {
@@ -11,7 +11,7 @@ export const useSites = () => {
     lower_bound: "sites",
   };
 
-  const { data, isLoading, isError } = useEosIoChainGetTableRows<ISiteWrapRow>(body);
+  const { data, isLoading, isError } = useEosIoChainGetTableRows<ISiteRow>(body);
 
   let sites: ISite[] = [];
 

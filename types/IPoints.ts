@@ -1,6 +1,6 @@
 import { EndPointStatus } from "../enums";
 
-export interface IPointerList {
+export interface IPoints {
   owner: string;
   api_endpoint: string;
   ssl_endpoint: string;
