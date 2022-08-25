@@ -3,12 +3,10 @@ import { api } from "../config";
 import { IEosIoChainGetAccount } from "../types";
 import { post } from "../utils";
 
-export const useEosIoChainGetAccount = (account_name: string, refresh = false) => {
-  const refreshInterval = refresh ? 1000 : 0;
-  const dedupingInterval = 500;
+export const useEosIoChainGetAccount = (account_name: string) => {
   const body = { account_name };
   const key = api.rpcGetTableRows + "?" + JSON.stringify(body);
-  const { data, error } = useSWR<IEosIoChainGetAccount>(key, post(api.rpcGetAccount, body), { refreshInterval, dedupingInterval });
+  const { data, error } = useSWR<IEosIoChainGetAccount>(key, post(api.rpcGetAccount, body));
   const account = data;
 
   return {

@@ -1,7 +1,7 @@
 import { useEosIoChainGetTableRows } from ".";
 import { ISite, ISiteWrapRow } from "../types";
 
-export const useSites = (refresh = false) => {
+export const useSites = () => {
   const body = {
     json: "true",
     code: "fibos123comc",
@@ -11,13 +11,13 @@ export const useSites = (refresh = false) => {
     lower_bound: "sites",
   };
 
-  const { data, isLoading, isError } = useEosIoChainGetTableRows<ISiteWrapRow>(body, refresh);
+  const { data, isLoading, isError } = useEosIoChainGetTableRows<ISiteWrapRow>(body);
 
   let sites: ISite[] = [];
 
   if (data && !isError) {
-    const string = data?.rows[0]?.text || "[]";
-    sites = JSON.parse(string) as ISite[];
+    const string = data.rows[0]?.text || "[]";
+    sites = JSON.parse(string);
   }
 
   return {

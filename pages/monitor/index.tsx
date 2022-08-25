@@ -65,7 +65,7 @@ const Page: NextPage = () => {
                           }
                         </td>
                         <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatNumber(item.number)}</td>
-                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatDate(item.date + "Z")}</td>
+                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatDate(item.date)}</td>
                       </tr>
                     ))}
                 </tbody>

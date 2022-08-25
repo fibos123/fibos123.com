@@ -10,15 +10,10 @@ export const useBpList = () => {
   const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
-    async function fetchBpList() {
-      if (!global || !producers || !producerJson) {
-        return;
-      }
-
+    if (global && producers && producerJson) {
       const bpList = Chain.generateBpList(producers, producerJson, global);
       setBpList(bpList);
     }
-    fetchBpList();
   }, [global, producers, producerJson]);
   return { bpList };
 };

@@ -11,16 +11,16 @@ interface IAccessPoints {
 
 export const usePointer = () => {
   const [accessPoints, setAccessPoints] = useState<IAccessPoints>();
-  const [pointerList, setPointerList] = useState<IPointerList[]>([]);
+  const [pointers, setPointers] = useState<IPointerList[]>([]);
   const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
     const pointer = new Pointer();
-    pointer.getProducerJson(producerJson);
+    pointer.run(producerJson);
 
     async function fetchData() {
       const data = pointer.list;
-      setPointerList(data);
+      setPointers(data);
       let accessPoints: IAccessPoints = {
         "p2p-peer-address": [],
         "http-api-address": [],
@@ -43,6 +43,6 @@ export const usePointer = () => {
 
   return {
     accessPoints,
-    pointerList,
+    pointerList: pointers,
   };
 };

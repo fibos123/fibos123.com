@@ -1,5 +1,4 @@
 export const formatDate = (value: string | number): string => {
-  let date;
   let dateString = "";
   if (!value) {
     return "";
@@ -12,11 +11,9 @@ export const formatDate = (value: string | number): string => {
     }
   }
   try {
-    date = new Date(value);
+    const date = new Date(value);
     dateString = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(date);
-  } catch (error) {
-    console.log(value, error);
-  }
+  } catch (error) {}
 
   return dateString;
 };

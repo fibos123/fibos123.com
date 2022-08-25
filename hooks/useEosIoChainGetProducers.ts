@@ -1,7 +1,7 @@
 import { useEosIoChainGetTableRows } from ".";
 import { IEosIoChainGetProducers } from "../types";
 
-export const useEosIoChainGetProducers = (refresh = false) => {
+export const useEosIoChainGetProducers = () => {
   const body = {
     scope: "eosio",
     code: "eosio",
@@ -12,7 +12,7 @@ export const useEosIoChainGetProducers = (refresh = false) => {
     index_position: 2,
   };
 
-  let { data, isLoading, isError } = useEosIoChainGetTableRows<IEosIoChainGetProducers>(body, refresh);
+  const { data, isLoading, isError } = useEosIoChainGetTableRows<IEosIoChainGetProducers>(body);
 
   const producers: IEosIoChainGetProducers[] | undefined = data?.rows;
 

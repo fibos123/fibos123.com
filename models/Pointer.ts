@@ -1,10 +1,21 @@
 import { IEosIoChainGetProducerJson, IPointerList } from "../types";
 import { get } from "../utils";
 
+// class Status {
+//   owner: string;
+//   api_endpoint: string;
+//   ssl_endpoint: string;
+//   p2p_endpoint: string;
+//   number: number;
+//   version: string;
+//   status: string;
+// }
+
 class Pointer {
-  point = "/v1/chain/get_info";
-  list: IPointerList[] = [];
-  getProducerJson = async (producerJson: IEosIoChainGetProducerJson[]) => {
+  private point = "/v1/chain/get_info";
+  public list: IPointerList[] = [];
+
+  async run(producerJson: IEosIoChainGetProducerJson[]) {
     this.list = [];
     producerJson.map((item) => {
       const bp: IPointerList = {
@@ -19,11 +30,11 @@ class Pointer {
       let json = [];
       try {
         json = JSON.parse(item.json);
-      } catch (err) {
-        console.info(err);
-      }
-      const nodes = json?.nodes || [];
+      } catch (error) {}
+      const nodes = json.nodes || [];
       const full = nodes.find((item2: { ssl_endpoint: any }) => item2.ssl_endpoint);
+      const seed = nodes.find((item2: { p2p_endpoint: any }) => item2.p2p_endpoint);
+
       if (full && full.ssl_endpoint.substring(0, 8) === "https://") {
         bp.api_endpoint = full.api_endpoint ? full.api_endpoint : "";
         bp.ssl_endpoint = full.ssl_endpoint;
@@ -31,20 +42,19 @@ class Pointer {
         bp.status = "notset";
       }
 
-      const seed = nodes.find((item2: { p2p_endpoint: any }) => item2.p2p_endpoint);
       if (seed) {
         bp.p2p_endpoint = seed.p2p_endpoint;
       }
 
       this.list.push(bp);
     });
-    this.checkStatus();
-  };
+    this.check();
+  }
 
-  checkStatus = async () => {
+  async check() {
     this.list
       .filter((item) => item.status === "waiting")
-      .map(async (item) => {
+      .forEach(async (item) => {
         try {
           const response = await get(item.ssl_endpoint + this.point);
           item.number = response?.head_block_num || 0;
@@ -54,19 +64,15 @@ class Pointer {
           } else {
             item.status = "fail";
           }
-          this.list = this.list.sort((x, y) => x.owner.localeCompare(y.owner));
-          this.list = this.list.sort((x, y) => x.status.localeCompare(y.status));
-          this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
-          this.list = this.list.sort((x, y) => y.number - x.number);
-        } catch (err) {
+        } catch (error) {
           item.status = "fail";
-          this.list = this.list.sort((x, y) => x.owner.localeCompare(y.owner));
-          this.list = this.list.sort((x, y) => x.status.localeCompare(y.status));
-          this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
-          this.list = this.list.sort((x, y) => y.number - x.number);
         }
+        this.list = this.list.sort((x, y) => x.owner.localeCompare(y.owner));
+        this.list = this.list.sort((x, y) => x.status.localeCompare(y.status));
+        this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
+        this.list = this.list.sort((x, y) => y.number - x.number);
       });
-  };
+  }
 }
 
 export default Pointer;

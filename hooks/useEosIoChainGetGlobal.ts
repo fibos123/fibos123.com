@@ -1,7 +1,7 @@
 import { useEosIoChainGetTableRows } from ".";
 import { IEosIoChainGetGlobal } from "../types";
 
-export const useEosIoChainGetGlobal = (refresh = false) => {
+export const useEosIoChainGetGlobal = () => {
   const body = {
     code: "eosio",
     json: true,
@@ -10,7 +10,7 @@ export const useEosIoChainGetGlobal = (refresh = false) => {
     table: "global",
   };
 
-  let { data, isLoading, isError } = useEosIoChainGetTableRows<IEosIoChainGetGlobal>(body, refresh);
+  let { data, isLoading, isError } = useEosIoChainGetTableRows<IEosIoChainGetGlobal>(body);
 
   const global: IEosIoChainGetGlobal | undefined = data?.rows[0];
 

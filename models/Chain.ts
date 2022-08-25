@@ -30,25 +30,21 @@ class Chain {
   };
 
   static generateBpList(producers: IEosIoChainGetProducers[], producerJson: IEosIoChainGetProducerJson[], global: IEosIoChainGetGlobal): IBpList[] {
-    let bpList: IBpList[] = [];
+    const bpList: IBpList[] = producers.map((item) => ({
+      owner: item.owner,
+      candidate_name: "",
+      logo: "",
+      staked: 0,
+      claim_rewards_total: 0,
+      claim_rewards_unreceived: 0,
+      weight_percent: 0,
+      urlFull: "",
+      urlSimple: "",
+      json: undefined,
+      producer: item,
+    }));
 
-    producers.forEach((item) => {
-      bpList.push({
-        owner: item.owner,
-        candidate_name: "",
-        logo: "",
-        staked: 0,
-        claim_rewards_total: 0,
-        claim_rewards_unreceived: 0,
-        weight_percent: 0,
-        urlFull: "",
-        urlSimple: "",
-        json: undefined,
-        producer: item,
-      });
-    });
-
-    bpList.map((item, index) => {
+    bpList.forEach((item, index) => {
       item.staked = this.votesToStaked(parseInt(item.producer.total_votes));
       const claimRewards = this.getClaimRewards(item.producer, global, index + 1);
       item.claim_rewards_total = claimRewards.total;
@@ -60,7 +56,7 @@ class Chain {
           item.urlFull = item.producer.url;
           item.urlSimple = url;
         }
-      } catch (err) {}
+      } catch (error) {}
 
       const jsonFile = producerJson.find((item2) => item2.owner === item.owner);
       if (jsonFile) {
@@ -72,9 +68,7 @@ class Chain {
             item.logo = logo;
           }
           item.json = json;
-        } catch (err) {
-          console.info(err);
-        }
+        } catch (error) {}
       }
       return item;
     });

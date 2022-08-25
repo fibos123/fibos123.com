@@ -17,7 +17,7 @@ export const useBpStatus = () => {
     },
     {
       name: "出块时间",
-      value: data && !error ? formatDate(data.head_block_time + "Z") : "",
+      value: data && !error ? formatDate(data.head_block_time) : "",
     },
     {
       name: "最新区块",
