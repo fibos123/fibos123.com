@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import config from "../config";
-import { ISiteWrap } from "../types";
+import { ISite, ISiteWrap } from "../types";
 import { post } from "../utils/api";
 
 export const useSites = () => {
@@ -15,13 +15,15 @@ export const useSites = () => {
 
   let { data, error } = useSWR<ISiteWrap>(config.rpc_get_table_rows, post(body));
 
+  let sites: ISite[] = [];
+
   if (data && !error) {
     const string = data?.rows[0]?.text || "[]";
-    data = JSON.parse(string);
+    sites = JSON.parse(string) as ISite[];
   }
 
   return {
-    sites: data,
+    sites,
     isLoading: error && !data,
     isError: error,
   };
