@@ -2,7 +2,6 @@ export { useSites } from "./useSites";
 export { useProducerStatus } from "./useProducerStatus";
 export { usePointer } from "./usePointer";
 export { useProducerDetail } from "./useProducerDetail";
-export { useBpListPage } from "./useBpListPage";
 export { useProducerInfo } from "./useProducerInfo";
 export { useProducers } from "./useProducers";
 export { useEosIoChainGetInfo } from "./useEosIoChainGetInfo";
