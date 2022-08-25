@@ -1,32 +1,3 @@
-const formatNumber = (num: number): string => {
-  return num.toLocaleString();
-};
-
-const formatPercent = (num: number): string => {
-  return num.toFixed(2);
-};
-
-const formatDate = (value: string | number): string => {
-  let date;
-  let dateString = "";
-  if (!value) {
-    return "";
-  }
-
-  if ("string" === typeof value) {
-    const isZChar = value.toString().slice(-1) === "Z";
-    if (!isZChar) {
-      value = value + "Z";
-    }
-  }
-  try {
-    date = new Date(value);
-    dateString = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(date);
-  } catch (error) {
-    console.log(value, error);
-  }
-
-  return dateString;
-};
-
-export default { formatNumber, formatPercent, formatDate };
+export { formatDate } from "./date";
+export { formatNumber, formatPercent } from "./number";
+export { get, post, fetcherPost } from "./request";

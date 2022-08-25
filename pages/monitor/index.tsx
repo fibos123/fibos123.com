@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import utils from "../../utils";
 import { useBpStatus } from "../../hooks";
+import { formatDate, formatNumber } from "../../utils";
 
 const Page: NextPage = () => {
   const { card, bpStatus } = useBpStatus();
@@ -64,8 +64,8 @@ const Page: NextPage = () => {
                             }[bpStatus.head_block_num - item.number <= 242 ? "online" : "offline"]
                           }
                         </td>
-                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{utils.formatNumber(item.number)}</td>
-                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{utils.formatDate(item.date + "Z")}</td>
+                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatNumber(item.number)}</td>
+                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatDate(item.date + "Z")}</td>
                       </tr>
                     ))}
                 </tbody>

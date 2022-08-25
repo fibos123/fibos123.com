@@ -1,14 +1,14 @@
 import useSWR from "swr";
-import config from "../config";
+import { api } from "../config";
 import { IBpStatus } from "../types";
-import utils from "../utils";
-import { get } from "../utils/api";
+import { formatDate, formatNumber } from "../utils";
+import { get } from "../utils";
 
 export const useBpStatus = () => {
   const refreshInterval = 1000;
   const dedupingInterval = 500;
 
-  const { data, error } = useSWR<IBpStatus>(config.api_bp_status, get, { refreshInterval, dedupingInterval });
+  const { data, error } = useSWR<IBpStatus>(api.apiBpStatus, get, { refreshInterval, dedupingInterval });
 
   const card = [
     {
@@ -17,11 +17,11 @@ export const useBpStatus = () => {
     },
     {
       name: "出块时间",
-      value: data && !error ? utils.formatDate(data.head_block_time + "Z") : "",
+      value: data && !error ? formatDate(data.head_block_time + "Z") : "",
     },
     {
       name: "最新区块",
-      value: data && !error ? utils.formatNumber(data.head_block_num) : "",
+      value: data && !error ? formatNumber(data.head_block_num) : "",
     },
   ];
 

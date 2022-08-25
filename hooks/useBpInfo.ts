@@ -1,5 +1,5 @@
 import { useEosIoChainGetInfo } from ".";
-import utils from "../utils";
+import { formatDate, formatNumber } from "../utils";
 
 export const useBpInfo = () => {
   const { info: data, isLoading, isError } = useEosIoChainGetInfo(true);
@@ -11,15 +11,15 @@ export const useBpInfo = () => {
     },
     {
       name: "出块时间",
-      value: data && !isError ? utils.formatDate(data.head_block_time + "Z") : "",
+      value: data && !isError ? formatDate(data.head_block_time) : "",
     },
     {
       name: "最新区块",
-      value: data && !isError ? utils.formatNumber(data.head_block_num) : "",
+      value: data && !isError ? formatNumber(data.head_block_num) : "",
     },
     {
       name: "不可逆区块",
-      value: data && !isError ? utils.formatNumber(data.last_irreversible_block_num) : "",
+      value: data && !isError ? formatNumber(data.last_irreversible_block_num) : "",
     },
   ];
 

@@ -1,8 +1,3 @@
-export interface ISiteWrap {
-  rows: ISiteWrapRow[];
-  more: boolean;
-}
-
 export interface ISiteWrapRow {
   id: string;
   text: string;

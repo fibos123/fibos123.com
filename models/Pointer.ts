@@ -1,5 +1,5 @@
 import { IEosIoChainGetProducerJson, IPointerList } from "../types";
-import { get } from "../utils/api";
+import { get } from "../utils";
 
 class Pointer {
   point = "/v1/chain/get_info";
@@ -16,12 +16,13 @@ class Pointer {
         version: "",
         status: "waiting",
       };
+      let json = [];
       try {
-        item.json = JSON.parse(item.json);
+        json = JSON.parse(item.json);
       } catch (err) {
         console.info(err);
       }
-      const nodes = item?.json?.nodes || [];
+      const nodes = json?.nodes || [];
       const full = nodes.find((item2: { ssl_endpoint: any }) => item2.ssl_endpoint);
       if (full && full.ssl_endpoint.substring(0, 8) === "https://") {
         bp.api_endpoint = full.api_endpoint ? full.api_endpoint : "";
@@ -57,14 +58,12 @@ class Pointer {
           this.list = this.list.sort((x, y) => x.status.localeCompare(y.status));
           this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
           this.list = this.list.sort((x, y) => y.number - x.number);
-          // this.list = _.orderBy(this.list, ["number", "version", "status", "owner"], ["desc", "desc", "asc", "asc"]);
         } catch (err) {
           item.status = "fail";
           this.list = this.list.sort((x, y) => x.owner.localeCompare(y.owner));
           this.list = this.list.sort((x, y) => x.status.localeCompare(y.status));
           this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
           this.list = this.list.sort((x, y) => y.number - x.number);
-          // this.list = _.orderBy(this.list, ["number", "version", "status", "owner"], ["desc", "desc", "asc", "asc"]);
         }
       });
   };

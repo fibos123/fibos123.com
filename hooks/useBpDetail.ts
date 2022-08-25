@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useEosIoChainGetAccount, useEosIoChainGetGlobal, useEosIoChainGetProducerJson, useEosIoChainGetProducers } from ".";
 import Chain from "../models/Chain";
-import utils from "../utils";
+import { formatDate, formatPercent, formatNumber } from "../utils";
 
 interface IDetail {
   title: string;
@@ -37,7 +37,7 @@ export const useBpDetail = (account_name: string) => {
           list: [
             {
               key: "创建时间",
-              value: utils.formatDate(account.created + "Z"),
+              value: formatDate(account.created + "Z"),
             },
             {
               key: "排名",
@@ -45,15 +45,15 @@ export const useBpDetail = (account_name: string) => {
             },
             {
               key: "得票率",
-              value: utils.formatPercent(bp.weight_percent) + " %",
+              value: formatPercent(bp.weight_percent) + " %",
             },
             {
               key: "有效票数",
-              value: utils.formatNumber(bp.staked) + " FO",
+              value: formatNumber(bp.staked) + " FO",
             },
             {
               key: "得票权重",
-              value: utils.formatNumber(parseInt(bp.producer.total_votes)),
+              value: formatNumber(parseInt(bp.producer.total_votes)),
             },
           ],
         },
@@ -62,19 +62,19 @@ export const useBpDetail = (account_name: string) => {
           list: [
             {
               key: "每日收益",
-              value: utils.formatNumber(bp.claim_rewards_total) + " FO",
+              value: formatNumber(bp.claim_rewards_total) + " FO",
             },
             {
               key: "未领取收益",
-              value: utils.formatNumber(bp.claim_rewards_unreceived) + " FO",
+              value: formatNumber(bp.claim_rewards_unreceived) + " FO",
             },
             {
               key: "未支付块",
-              value: utils.formatNumber(bp.producer.unpaid_blocks),
+              value: formatNumber(bp.producer.unpaid_blocks),
             },
             {
               key: "上次领取时间",
-              value: utils.formatDate(bp.producer.last_claim_time / 1000),
+              value: formatDate(bp.producer.last_claim_time / 1000),
             },
           ],
         },
