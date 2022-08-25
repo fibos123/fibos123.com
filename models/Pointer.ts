@@ -1,3 +1,4 @@
+import { EndPointStatus } from "../enums";
 import { IEosIoChainGetProducerJson, IPointerList } from "../types";
 import { get } from "../utils";
 
@@ -17,7 +18,7 @@ class Pointer {
 
   async run(producerJson: IEosIoChainGetProducerJson[]) {
     this.list = [];
-    producerJson.map((item) => {
+    this.list = producerJson.map((item) => {
       const bp: IPointerList = {
         owner: item.owner,
         api_endpoint: "",
@@ -25,7 +26,7 @@ class Pointer {
         p2p_endpoint: "",
         number: 0,
         version: "",
-        status: "waiting",
+        status: EndPointStatus.waiting,
       };
       let json = [];
       try {
@@ -39,36 +40,36 @@ class Pointer {
         bp.api_endpoint = full.api_endpoint ? full.api_endpoint : "";
         bp.ssl_endpoint = full.ssl_endpoint;
       } else {
-        bp.status = "notset";
+        bp.status = EndPointStatus.notSet;
       }
 
       if (seed) {
         bp.p2p_endpoint = seed.p2p_endpoint;
       }
 
-      this.list.push(bp);
+      return bp;
     });
     this.check();
   }
 
   async check() {
     this.list
-      .filter((item) => item.status === "waiting")
+      .filter((item) => item.status === EndPointStatus.waiting)
       .forEach(async (item) => {
         try {
           const response = await get(item.ssl_endpoint + this.point);
           item.number = response?.head_block_num || 0;
           item.version = response?.server_version_string || "";
           if (item.number) {
-            item.status = "success";
+            item.status = EndPointStatus.success;
           } else {
-            item.status = "fail";
+            item.status = EndPointStatus.fail;
           }
         } catch (error) {
-          item.status = "fail";
+          item.status = EndPointStatus.fail;
         }
         this.list = this.list.sort((x, y) => x.owner.localeCompare(y.owner));
-        this.list = this.list.sort((x, y) => x.status.localeCompare(y.status));
+        this.list = this.list.sort((x, y) => y.status - x.status);
         this.list = this.list.sort((x, y) => x.version.localeCompare(y.version));
         this.list = this.list.sort((x, y) => y.number - x.number);
       });

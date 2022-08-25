@@ -1,3 +1,5 @@
+import { EndPointStatus } from "../enums";
+
 export interface IPointerList {
   owner: string;
   api_endpoint: string;
@@ -5,5 +7,5 @@ export interface IPointerList {
   p2p_endpoint: string;
   number: number;
   version: string;
-  status: "waiting" | "success" | "fail" | "notset";
+  status: EndPointStatus;
 }
