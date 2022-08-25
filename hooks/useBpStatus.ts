@@ -1,4 +1,3 @@
-import _ from "lodash";
 import useSWR from "swr";
 import config from "../config";
 import { IBpStatus } from "../types";

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { fetcherPost } from "../utils/api";
 import _ from "lodash";
 import config from "../config";
 import { IAccount, IBpList, IGlobalRow, IProducerJsonRow, IProducerRow } from "../types";
@@ -33,55 +33,46 @@ class Chain {
   };
 
   static getGlobal = async (): Promise<IGlobalRow> => {
-    const response = await axios.post(
-      config.rpc_get_table_rows,
-      JSON.stringify({
-        code: "eosio",
-        json: true,
-        limit: 1,
-        scope: "eosio",
-        table: "global",
-      })
-    );
-    const data = _.get(response, "data.rows[0]", {});
+    const response = await fetcherPost(config.rpc_get_table_rows, {
+      code: "eosio",
+      json: true,
+      limit: 1,
+      scope: "eosio",
+      table: "global",
+    });
+    const data = _.get(response, "rows[0]", {});
     return data;
   };
 
   static getProducers = async (): Promise<IProducerRow[]> => {
-    const response = await axios.post(
-      config.rpc_get_table_rows,
-      JSON.stringify({
-        scope: "eosio",
-        code: "eosio",
-        table: "producers",
-        json: true,
-        limit: 100,
-        key_type: "float64",
-        index_position: 2,
-      })
-    );
-    const data = _.get(response, "data.rows", []);
+    const response = await fetcherPost(config.rpc_get_table_rows, {
+      scope: "eosio",
+      code: "eosio",
+      table: "producers",
+      json: true,
+      limit: 100,
+      key_type: "float64",
+      index_position: 2,
+    });
+    const data = _.get(response, "rows", []);
     return data;
   };
 
   static getProducerJson = async (): Promise<IProducerJsonRow[]> => {
-    const response = await axios.post(
-      config.rpc_get_table_rows,
-      JSON.stringify({
-        json: true,
-        code: "producerjson",
-        scope: "producerjson",
-        table: "producerjson",
-        limit: 1000,
-      })
-    );
-    const data = _.get(response, "data.rows", []);
+    const response = await fetcherPost(config.rpc_get_table_rows, {
+      json: true,
+      code: "producerjson",
+      scope: "producerjson",
+      table: "producerjson",
+      limit: 1000,
+    });
+    const data = _.get(response, "rows", []);
     return data;
   };
 
-  static getAccount = async (id: string): Promise<IAccount> => {
-    const response = await axios.post(config.rpc_get_account, JSON.stringify({ account_name: id }));
-    const data = _.get(response, "data", {});
+  static getAccount = async (account_name: string): Promise<IAccount> => {
+    const response = await fetcherPost(config.rpc_get_account, { account_name });
+    const data = response;
     return data;
   };
 

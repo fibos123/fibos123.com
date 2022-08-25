@@ -1,6 +1,6 @@
-const init: any = {};
+const init: RequestInit = {};
 
-export const get = async (url: string) => {
+export const get = async (url: string, requestInit: RequestInit = {}) => {
   const response = await fetch(url, {
     method: "GET",
     ...init,
@@ -8,7 +8,7 @@ export const get = async (url: string) => {
   return response.json();
 };
 
-const fetcherPost = async (url: string, data: any) => {
+export const fetcherPost = async (url: string, data: any) => {
   const response = await fetch(url, {
     method: "POST",
     ...init,

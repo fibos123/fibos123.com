@@ -1,6 +1,6 @@
-import axios from "axios";
 import _ from "lodash";
 import { IPointerList } from "../types";
+import { get } from "../utils/api";
 import Chain from "./Chain";
 
 class Pointer {
@@ -48,9 +48,9 @@ class Pointer {
       .filter((item) => item.status === "waiting")
       .map(async (item) => {
         try {
-          const response = await axios.get(item.ssl_endpoint + this.point, { timeout: 2000 });
-          item.number = _.get(response, "data.head_block_num", 0);
-          item.version = _.get(response, "data.server_version_string", "");
+          const response = await get(item.ssl_endpoint + this.point);
+          item.number = _.get(response, "head_block_num", 0);
+          item.version = _.get(response, "server_version_string", "");
           if (item.number) {
             item.status = "success";
           } else {
