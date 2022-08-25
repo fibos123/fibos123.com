@@ -1,4 +1,4 @@
-export interface ISiteRow {
+export interface ISiteRaw {
   id: string;
   text: string;
 }

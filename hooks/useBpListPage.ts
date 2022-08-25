@@ -1,8 +1,8 @@
-import { useBpInfo, useBpList } from ".";
+import { useProducerInfo, useProducers } from ".";
 
 export const useBpListPage = () => {
-  const { info } = useBpInfo();
-  const { bpList } = useBpList();
+  const { info } = useProducerInfo();
+  const { bpList } = useProducers();
 
   return { info, bpList };
 };

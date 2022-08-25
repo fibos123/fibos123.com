@@ -1,10 +1,10 @@
 export { useSites } from "./useSites";
-export { useBpStatus } from "./useBpStatus";
+export { useProducerStatus } from "./useProducerStatus";
 export { usePointer } from "./usePointer";
-export { useBpDetail } from "./useBpDetail";
+export { useProducerDetail } from "./useProducerDetail";
 export { useBpListPage } from "./useBpListPage";
-export { useBpInfo } from "./useBpInfo";
-export { useBpList } from "./useBpList";
+export { useProducerInfo } from "./useProducerInfo";
+export { useProducers } from "./useProducers";
 export { useEosIoChainGetInfo } from "./useEosIoChainGetInfo";
 export { useEosIoChainGetAccount } from "./useEosIoChainGetAccount";
 export { useEosIoChainGetTableRows } from "./useEosIoChainGetTableRows";

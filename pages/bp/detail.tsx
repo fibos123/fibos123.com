@@ -2,12 +2,12 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import { useBpDetail } from "../../hooks";
+import { useProducerDetail } from "../../hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const { account } = router.query as { account: string };
-  const { detail } = useBpDetail(account);
+  const { detail } = useProducerDetail(account);
 
   return (
     <Layout title="节点信息 | FIBOS 导航">

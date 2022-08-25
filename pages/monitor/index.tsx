@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import { useBpStatus } from "../../hooks";
+import { useProducerStatus } from "../../hooks";
 import { formatDate, formatNumber } from "../../utils";
 
 const Page: NextPage = () => {
-  const { card, bpStatus } = useBpStatus();
+  const { card, producerStatus } = useProducerStatus();
 
   return (
     <Layout title="节点监控 | FIBOS 导航">
@@ -13,10 +13,14 @@ const Page: NextPage = () => {
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
-              <a className="bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">出块节点在线状态</a>
+              <a className="bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">
+                出块节点在线状态
+              </a>
             </Link>
             <Link href="/monitor/pointer">
-              <a className="ml-4 text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">接入点状态监测</a>
+              <a className="ml-4 text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
+                接入点状态监测
+              </a>
             </Link>
           </div>
 
@@ -45,10 +49,10 @@ const Page: NextPage = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-slate-100">
-                  {bpStatus &&
-                    bpStatus.rows2.map((item, index) => (
-                      <tr key={item.bpname} className={item.bpname === bpStatus.head_block_producer ? "font-bold" : ""}>
-                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{index + 1}</td>
+                  {producerStatus &&
+                    producerStatus.rows2.map((item, index) => (
+                      <tr key={item.bpname} className={item.bpname === producerStatus.head_block_producer ? "font-bold" : ""}>
+                        <td className={item.bpname === producerStatus.head_block_producer ? "text-slate-800" : ""}>{index + 1}</td>
                         <td className="px-4 py-2 whitespace-no-wrap">
                           <div className="flex items-center">
                             <div className="ml-2">
@@ -59,13 +63,23 @@ const Page: NextPage = () => {
                         <td>
                           {
                             {
-                              online: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">在线</span>,
-                              offline: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800">离线</span>,
-                            }[bpStatus.head_block_num - item.number <= 242 ? "online" : "offline"]
+                              online: (
+                                <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                  在线
+                                </span>
+                              ),
+                              offline: (
+                                <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800">离线</span>
+                              ),
+                            }[producerStatus.head_block_num - item.number <= 242 ? "online" : "offline"]
                           }
                         </td>
-                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatNumber(item.number)}</td>
-                        <td className={item.bpname === bpStatus.head_block_producer ? "text-slate-800" : ""}>{formatDate(item.date)}</td>
+                        <td className={item.bpname === producerStatus.head_block_producer ? "text-slate-800" : ""}>
+                          {formatNumber(item.number)}
+                        </td>
+                        <td className={item.bpname === producerStatus.head_block_producer ? "text-slate-800" : ""}>
+                          {formatDate(item.date)}
+                        </td>
                       </tr>
                     ))}
                 </tbody>

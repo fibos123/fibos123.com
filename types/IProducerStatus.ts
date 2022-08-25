@@ -1,4 +1,4 @@
-export interface IBpStatus {
+export interface IProducerStatus {
   rows: any[];
   rows2: IBpStatusRows2[];
   head_block_num: number;

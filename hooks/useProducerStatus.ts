@@ -1,14 +1,14 @@
 import useSWR from "swr";
 import { api } from "../config";
-import { IBpStatus } from "../types";
+import { IProducerStatus } from "../types";
 import { formatDate, formatNumber } from "../utils";
 import { get } from "../utils";
 
-export const useBpStatus = () => {
+export const useProducerStatus = () => {
   const refreshInterval = 1000;
   const dedupingInterval = 500;
 
-  const { data, error } = useSWR<IBpStatus>(api.apiBpStatus, get, { refreshInterval, dedupingInterval });
+  const { data, error } = useSWR<IProducerStatus>(api.apiBpStatus, get, { refreshInterval, dedupingInterval });
 
   const card = [
     {
@@ -27,7 +27,7 @@ export const useBpStatus = () => {
 
   return {
     card,
-    bpStatus: data,
+    producerStatus: data,
     isLoading: error && !data,
     isError: error,
   };

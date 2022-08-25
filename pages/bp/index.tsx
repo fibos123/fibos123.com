@@ -60,8 +60,8 @@ const Page: NextPage = () => {
                       <div>{formatPercent(item.weight_percent)} %</div>
                       <div className="text-slate-400 text-sm">{formatNumber(item.staked)} FO</div>
                     </td>
-                    <td className="text-slate-400">{formatNumber(item.claim_rewards_total)} FO</td>
-                    <td className={"" + (item.claim_rewards_unreceived ? "text-green-500 font-bold" : "text-slate-400")}>{formatNumber(item.claim_rewards_unreceived)} FO</td>
+                    <td className="text-slate-400">{formatNumber(item.claimRewardsTotal)} FO</td>
+                    <td className={"" + (item.claimRewardsUnreceived ? "text-green-500 font-bold" : "text-slate-400")}>{formatNumber(item.claimRewardsUnreceived)} FO</td>
                     <td className="text-slate-400">
                       <a href={item.urlFull} target="_blank" rel="noreferrer" className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">
                         {item.urlSimple}

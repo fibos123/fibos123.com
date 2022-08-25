@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useEosIoChainGetGlobal, useEosIoChainGetProducerJson, useEosIoChainGetProducers } from ".";
-import Chain from "../models/Chain";
-import { IBpList } from "../types";
+import { IProducer } from "../types";
+import { getProducers } from "../utils";
 
-export const useBpList = () => {
-  const [bpList, setBpList] = useState<IBpList[]>([]);
+export const useProducers = () => {
+  const [bpList, setBpList] = useState<IProducer[]>([]);
   const { global } = useEosIoChainGetGlobal();
   const { producers } = useEosIoChainGetProducers();
   const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
     if (global && producers && producerJson) {
-      const bpList = Chain.generateBpList(producers, producerJson, global);
+      const bpList = getProducers(producers, producerJson, global);
       setBpList(bpList);
     }
   }, [global, producers, producerJson]);

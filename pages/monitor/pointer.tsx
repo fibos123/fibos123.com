@@ -19,16 +19,23 @@ const Page: NextPage = () => {
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
-              <a className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">出块节点在线状态</a>
+              <a className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
+                出块节点在线状态
+              </a>
             </Link>
             <Link href="/monitor/pointer">
-              <a className="ml-4 bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">接入点状态监测</a>
+              <a className="ml-4 bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">
+                接入点状态监测
+              </a>
             </Link>
           </div>
 
           <div className="flex justify-between">
             <div className="text-2xl">接入点状态监测</div>
-            <a className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+            <a
+              className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out cursor-pointer"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               可用接入点列表
             </a>
           </div>
@@ -56,22 +63,40 @@ const Page: NextPage = () => {
                         <td>
                           {
                             [
-                              <span key={EndPointStatus.notSet} className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">
+                              <span
+                                key={EndPointStatus.notSet}
+                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800"
+                              >
                                 未设置
                               </span>,
-                              <span key={EndPointStatus.waiting} className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">
+                              <span
+                                key={EndPointStatus.waiting}
+                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800"
+                              >
                                 获取中
                               </span>,
-                              <span key={EndPointStatus.fail} className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800">
+                              <span
+                                key={EndPointStatus.fail}
+                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800"
+                              >
                                 无法访问
                               </span>,
-                              <span key={EndPointStatus.success} className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                              <span
+                                key={EndPointStatus.success}
+                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                              >
                                 {formatNumber(item.number)} ( {item.version} )
                               </span>,
                             ][item.status]
                           }
                           {item.status !== EndPointStatus.notSet && (
-                            <a target="_blank" href={item.ssl_endpoint + "/v1/chain/get_info"} rel="noreferrer" className="ml-4 fill-indigo-500" title="打开新窗口查看接入点">
+                            <a
+                              target="_blank"
+                              href={item.ssl_endpoint + "/v1/chain/get_info"}
+                              rel="noreferrer"
+                              className="ml-4 fill-indigo-500"
+                              title="打开新窗口查看接入点"
+                            >
                               <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
                             </a>
                           )}

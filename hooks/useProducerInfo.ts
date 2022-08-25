@@ -1,7 +1,7 @@
 import { useEosIoChainGetInfo } from ".";
 import { formatDate, formatNumber } from "../utils";
 
-export const useBpInfo = () => {
+export const useProducerInfo = () => {
   const { info: data, isLoading, isError } = useEosIoChainGetInfo(true);
 
   const info = [

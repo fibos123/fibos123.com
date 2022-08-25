@@ -1,7 +1,6 @@
-export type { IBpJson } from "./IBpJson";
-export type { IBpList } from "./IBpList";
-export type { IBpStatus } from "./IBpStatus";
-export type { ISite, ISiteRow } from "./ISite";
+export type { IProducer, IProducerJson } from "./IProducer";
+export type { IProducerStatus } from "./IProducerStatus";
+export type { ISite, ISiteRaw } from "./ISite";
 export type { IPoints } from "./IPoints";
 
 export type { IEosIoChainGetGlobal } from "./IEosIoChainGetGlobal";

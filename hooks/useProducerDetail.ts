@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useEosIoChainGetAccount, useEosIoChainGetGlobal, useEosIoChainGetProducerJson, useEosIoChainGetProducers } from ".";
-import Chain from "../models/Chain";
-import { formatDate, formatPercent, formatNumber } from "../utils";
+import { formatDate, formatPercent, formatNumber, getProducers } from "../utils";
 
 interface IDetail {
   title: string;
@@ -11,7 +10,7 @@ interface IDetail {
   }[];
 }
 
-export const useBpDetail = (account_name: string) => {
+export const useProducerDetail = (account_name: string) => {
   const [detail, setDetail] = useState<IDetail[]>([]);
   const { account } = useEosIoChainGetAccount(account_name);
   const { global } = useEosIoChainGetGlobal();
@@ -23,7 +22,7 @@ export const useBpDetail = (account_name: string) => {
       return;
     }
 
-    const bpList = Chain.generateBpList(producers, producerJson, global);
+    const bpList = getProducers(producers, producerJson, global);
     const bp = bpList.find((item) => item.owner === account_name);
     if (!bp) {
       return;
@@ -60,11 +59,11 @@ export const useBpDetail = (account_name: string) => {
         list: [
           {
             key: "每日收益",
-            value: formatNumber(bp.claim_rewards_total) + " FO",
+            value: formatNumber(bp.claimRewardsTotal) + " FO",
           },
           {
             key: "未领取收益",
-            value: formatNumber(bp.claim_rewards_unreceived) + " FO",
+            value: formatNumber(bp.claimRewardsUnreceived) + " FO",
           },
           {
             key: "未支付块",
