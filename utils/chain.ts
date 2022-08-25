@@ -90,7 +90,6 @@ export class PointersStatus {
   public points: IPoints[] = [];
 
   async run(producerJson: IEosIoChainGetProducerJson[]) {
-    this.points = [];
     this.points = producerJson.map((item) => {
       const owner = item.owner;
       let api_endpoint = "";
@@ -125,7 +124,7 @@ export class PointersStatus {
         p2p_endpoint,
         number: 0,
         version: "",
-        status: EndPointStatus.waiting,
+        status,
       };
 
       return bp;
