@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { useEffect, useState } from "react";
 import Pointer from "../models/Pointer";
 import { IPointerList } from "../types";
@@ -26,11 +25,12 @@ export const usePointer = () => {
         "https-api-address": [],
       };
       const successList = data.filter((item) => item.status === "success");
-      accessPoints["p2p-peer-address"] = _.union(successList.filter((item) => item.p2p_endpoint).map((item) => item.p2p_endpoint));
-
-      accessPoints["http-api-address"] = _.union(successList.filter((item) => item.api_endpoint).map((item) => item.api_endpoint));
-
-      accessPoints["https-api-address"] = _.union(successList.filter((item) => item.ssl_endpoint).map((item) => item.ssl_endpoint));
+      const p2pList = successList.filter((item) => item.p2p_endpoint).map((item) => item.p2p_endpoint);
+      const apiList = successList.filter((item) => item.api_endpoint).map((item) => item.api_endpoint);
+      const sslList = successList.filter((item) => item.ssl_endpoint).map((item) => item.ssl_endpoint);
+      accessPoints["p2p-peer-address"] = [...new Set([...p2pList])];
+      accessPoints["http-api-address"] = [...new Set([...apiList])];
+      accessPoints["https-api-address"] = [...new Set([...sslList])];
 
       setAccessPoints(accessPoints);
     }

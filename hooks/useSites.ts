@@ -1,7 +1,6 @@
-import _ from "lodash";
 import useSWR from "swr";
 import config from "../config";
-import { ISite } from "../types";
+import { ISiteWrap } from "../types";
 import { post } from "../utils/api";
 
 export const useSites = () => {
@@ -14,10 +13,10 @@ export const useSites = () => {
     lower_bound: "sites",
   };
 
-  let { data, error } = useSWR<ISite[]>(config.rpc_get_table_rows, post(body));
+  let { data, error } = useSWR<ISiteWrap>(config.rpc_get_table_rows, post(body));
 
   if (data && !error) {
-    const string = _.get(data, "rows[0].text", "[]");
+    const string = data?.rows[0]?.text || "[]";
     data = JSON.parse(string);
   }
 

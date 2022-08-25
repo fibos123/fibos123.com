@@ -1,5 +1,4 @@
 import { fetcherPost } from "../utils/api";
-import _ from "lodash";
 import config from "../config";
 import { IAccount, IBpList, IGlobalRow, IProducerJsonRow, IProducerRow } from "../types";
 
@@ -40,7 +39,7 @@ class Chain {
       scope: "eosio",
       table: "global",
     });
-    const data = _.get(response, "rows[0]", {});
+    const data = response?.rows[0] || {};
     return data;
   };
 
@@ -54,7 +53,7 @@ class Chain {
       key_type: "float64",
       index_position: 2,
     });
-    const data = _.get(response, "rows", []);
+    const data = response?.rows || [];
     return data;
   };
 
@@ -66,7 +65,7 @@ class Chain {
       table: "producerjson",
       limit: 1000,
     });
-    const data = _.get(response, "rows", []);
+    const data = response?.rows || [];
     return data;
   };
 
@@ -113,8 +112,8 @@ class Chain {
       if (jsonFile) {
         try {
           const json = JSON.parse(jsonFile.json);
-          item.candidate_name = _.get(json, "org.candidate_name", "");
-          const logo = _.get(json, "org.branding.logo_256");
+          item.candidate_name = json?.org?.candidate_name || "";
+          const logo = json?.org?.branding?.logo_256 || "";
           if (logo && logo.substring(0, 8) === "https://") {
             item.logo = logo;
           }

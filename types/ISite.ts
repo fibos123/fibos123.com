@@ -1,3 +1,13 @@
+export interface ISiteWrap {
+  rows: ISiteWrapRow[];
+  more: boolean;
+}
+
+export interface ISiteWrapRow {
+  id: string;
+  text: string;
+}
+
 export interface ISite {
   icon: string;
   name: string;

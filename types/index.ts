@@ -6,5 +6,5 @@ export type { IGlobal, IGlobalRow } from "./IGlobal";
 export type { IPointerList } from "./IPointerList";
 export type { IProducer, IProducerRow } from "./IProducer";
 export type { IProducerJson, IProducerJsonRow } from "./IProducerJson";
-export type { ISite } from "./ISite";
+export type { ISite, ISiteWrap } from "./ISite";
 export type { IInfo } from "./IInfo";

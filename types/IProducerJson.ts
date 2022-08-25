@@ -5,5 +5,5 @@ export interface IProducerJson {
 
 export interface IProducerJsonRow {
   owner: string;
-  json: string;
+  json: any;
 }
