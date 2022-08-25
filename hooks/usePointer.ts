@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { EndPointStatus } from "../enums";
-import Pointer from "../models/Pointer";
 import { IPoints } from "../types";
+import { PointersStatus } from "../utils";
 import { useEosIoChainGetProducerJson } from "./useEosIoChainGetProducerJson";
 
 interface IAccessPoints {
@@ -16,11 +16,11 @@ export const usePointer = () => {
   const { producerJson } = useEosIoChainGetProducerJson();
 
   useEffect(() => {
-    const pointer = new Pointer();
-    pointer.run(producerJson);
+    const pointersStatus = new PointersStatus();
+    pointersStatus.run(producerJson);
 
     async function fetchData() {
-      const points = pointer.points;
+      const points = pointersStatus.points;
       const successList = points.filter((item) => item.status === EndPointStatus.success);
       const p2pList = successList.filter((item) => item.p2p_endpoint).map((item) => item.p2p_endpoint);
       const apiList = successList.filter((item) => item.api_endpoint).map((item) => item.api_endpoint);
