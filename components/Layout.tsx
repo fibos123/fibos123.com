@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import Header from "./Header";
-import Footer from "./Footer";
+import { Header, Footer } from "./";
 
 type Props = {
   children?: ReactNode;
@@ -9,7 +8,7 @@ type Props = {
   mode?: string;
 };
 
-const Layout = ({ children, title = "This is the default title", mode }: Props) => (
+export const Layout = ({ children, title = "This is the default title", mode }: Props) => (
   <div className={"bg-slate-100 text-slate-800 mx-auto min-h-screen relative pb-32 " + (mode === "dark" ? "dark" : "")}>
     <Head>
       <title>{title}</title>
@@ -23,5 +22,3 @@ const Layout = ({ children, title = "This is the default title", mode }: Props) 
     <Footer />
   </div>
 );
-
-export default Layout;

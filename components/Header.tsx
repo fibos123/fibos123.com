@@ -20,7 +20,7 @@ const menu = [
   },
 ];
 
-const Header = () => {
+export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const getFirstPath = () => {
@@ -87,7 +87,12 @@ const Header = () => {
       </div>
       <div className={"absolute top-0 inset-x-0 p-2 transition transform origin-top-right sm:hidden " + (isOpen ? "block" : "hidden")}>
         <div className="rounded-lg shadow-md">
-          <div className="rounded-lg bg-white shadow-xs overflow-hidden" role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
+          <div
+            className="rounded-lg bg-white shadow-xs overflow-hidden"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="main-menu"
+          >
             <div className="px-5 pt-4 flex items-center justify-between">
               <div>
                 <svg
@@ -138,5 +143,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;

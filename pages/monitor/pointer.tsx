@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import Link from "next/link";
-import Layout from "../../components/Layout";
+import { Layout } from "../../components";
 import { usePointer } from "../../hooks";
 import { formatNumber } from "../../utils";
 import { EndPointStatus } from "../../enums";

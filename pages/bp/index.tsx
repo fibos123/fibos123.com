@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import Layout from "../../components/Layout";
+import { Layout } from "../../components";
 import { useBpListPage } from "../../hooks";
 import { formatPercent, formatNumber } from "../../utils";
 
@@ -43,7 +43,11 @@ const Page: NextPage = () => {
                 {bpList.map((item, index) => (
                   <tr key={index}>
                     <td className="text-slate-400 text-center">{index + 1}</td>
-                    <td className="px-2 py-2 text-center">{item.logo && <span className="h-12 w-12 block bg-cover mx-auto" style={{ backgroundImage: "url(" + item.logo + ")" }}></span>}</td>
+                    <td className="px-2 py-2 text-center">
+                      {item.logo && (
+                        <span className="h-12 w-12 block bg-cover mx-auto" style={{ backgroundImage: "url(" + item.logo + ")" }}></span>
+                      )}
+                    </td>
                     <td>
                       <div>{item.candidate_name}</div>
                       <div className="text-slate-400">{item.owner}</div>
@@ -51,8 +55,16 @@ const Page: NextPage = () => {
                     <td>
                       {
                         {
-                          active: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">当选节点</span>,
-                          waiting: <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">待机节点</span>,
+                          active: (
+                            <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                              当选节点
+                            </span>
+                          ),
+                          waiting: (
+                            <span className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800">
+                              待机节点
+                            </span>
+                          ),
                         }[index + 1 <= 21 ? "active" : "waiting"]
                       }
                     </td>
@@ -61,15 +73,25 @@ const Page: NextPage = () => {
                       <div className="text-slate-400 text-sm">{formatNumber(item.staked)} FO</div>
                     </td>
                     <td className="text-slate-400">{formatNumber(item.claimRewardsTotal)} FO</td>
-                    <td className={"" + (item.claimRewardsUnreceived ? "text-green-500 font-bold" : "text-slate-400")}>{formatNumber(item.claimRewardsUnreceived)} FO</td>
+                    <td className={"" + (item.claimRewardsUnreceived ? "text-green-500 font-bold" : "text-slate-400")}>
+                      {formatNumber(item.claimRewardsUnreceived)} FO
+                    </td>
                     <td className="text-slate-400">
-                      <a href={item.urlFull} target="_blank" rel="noreferrer" className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">
+                      <a
+                        href={item.urlFull}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out"
+                      >
                         {item.urlSimple}
                       </a>
                     </td>
                     <td>
                       <Link href={"/bp/detail?account=" + item.owner}>
-                        <a href={"/bp/detail?account=" + item.owner} className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">
+                        <a
+                          href={"/bp/detail?account=" + item.owner}
+                          className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out"
+                        >
                           详情
                         </a>
                       </Link>

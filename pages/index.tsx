@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Layout from "../components/Layout";
+import { Layout } from "../components";
 import { useSites } from "../hooks";
 
 const Page: NextPage = () => {
@@ -31,7 +31,9 @@ const Page: NextPage = () => {
             sites.map((item) => (
               <section key={item.name} className="bg-white p-4 rounded mb-4">
                 <div className="border-b text-lg pb-4 sm:pl-2">
-                  {item.icon && <i className={"inline-block w-5 h-5 mr-2 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>}
+                  {item.icon && (
+                    <i className={"inline-block w-5 h-5 mr-2 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
+                  )}
                   <span className="align-middle">{item.name}</span>
                 </div>
                 {item.sub.map((item) => (
@@ -44,7 +46,12 @@ const Page: NextPage = () => {
                     <ul className="flex flex-wrap sm:gap-x-4 pt-4">
                       {item.child.map((item) => (
                         <li key={item.name} className="w-1/2 relative border-dotted border-r sm:pr-4 sm:w-64 border-b sm:border-b-0">
-                          <a href={item.url} target="_blank" rel="noreferrer" className="hover:bg-indigo-50 block pt-3 px-1 sm:px-4 rounded transition duration-150 ease-in-out h-32 sm:h-24">
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="hover:bg-indigo-50 block pt-3 px-1 sm:px-4 rounded transition duration-150 ease-in-out h-32 sm:h-24"
+                          >
                             <p className="pb-1 text-blue-500 fill-blue-500">
                               {item.icon && (
                                 <i
@@ -60,7 +67,12 @@ const Page: NextPage = () => {
                           </a>
                           {item.more && (
                             <p className="absolute top-0 right-0 mt-2 sm:mr-6 mr-2">
-                              <a href={item.more.url} target="_blank" rel="noreferrer" className="text-xs rounded bg-blue-600 py-1 px-2 text-white block">
+                              <a
+                                href={item.more.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-xs rounded bg-blue-600 py-1 px-2 text-white block"
+                              >
                                 {item.more.name}
                               </a>
                             </p>

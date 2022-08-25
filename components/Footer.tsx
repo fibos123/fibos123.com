@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Footer = () => (
+export const Footer = () => (
   <div className="bg-white px-6 h-32 flex justify-between absolute bottom-0 w-full items-center">
     <div>
       © {new Date().getFullYear()}
@@ -20,5 +20,3 @@ const Footer = () => (
     </div>
   </div>
 );
-
-export default Footer;
