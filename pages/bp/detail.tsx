@@ -12,7 +12,7 @@ const Page: NextPage = () => {
   return (
     <Layout title="节点信息 | FIBOS 导航">
       <div className="px-6">
-        <div className="bg-white p-6 rounded">
+        <div className="rounded bg-white p-6">
           <div className="border-b pb-4">
             <h1 className="text-2xl">{account} 节点详情</h1>
           </div>
@@ -21,7 +21,7 @@ const Page: NextPage = () => {
             {detail &&
               detail.map((item) => (
                 <div key={item.title}>
-                  <h2 className="text-xl py-4">{item.title}</h2>
+                  <h2 className="py-4 text-xl">{item.title}</h2>
                   <table>
                     <tbody>
                       {item.list.map((item) => (
@@ -39,7 +39,7 @@ const Page: NextPage = () => {
 
         <div className="py-6">
           <Link href="/bp">
-            <a className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">返回列表</a>
+            <a className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">返回列表</a>
           </Link>
         </div>
       </div>

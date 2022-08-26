@@ -5,11 +5,11 @@ import { Header, Footer } from "./";
 type Props = {
   children?: ReactNode;
   title?: string;
-  mode?: string;
+  id?: string;
 };
 
-export const Layout = ({ children, title = "This is the default title", mode }: Props) => (
-  <div className={"bg-slate-100 text-slate-800 mx-auto min-h-screen relative pb-32 " + (mode === "dark" ? "dark" : "")}>
+export const Layout = ({ children, title = "This is the default title", id }: Props) => (
+  <div id={id} className="bg-slate-100 text-slate-800 mx-auto min-h-screen relative pb-32 ">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />

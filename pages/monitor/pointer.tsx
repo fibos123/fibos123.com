@@ -19,12 +19,12 @@ const Page: NextPage = () => {
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
-              <a className="text-indigo-500 transition duration-150 ease-in-out bg-white py-2 px-4 rounded hover:bg-indigo-500 hover:text-white">
+              <a className="rounded bg-white py-2 px-4 text-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white">
                 出块节点在线状态
               </a>
             </Link>
             <Link href="/monitor/pointer">
-              <a className="ml-4 bg-indigo-500 transition duration-150 ease-in-out text-white py-2 px-4 rounded cursor-default">
+              <a className="ml-4 cursor-default rounded bg-indigo-500 py-2 px-4 text-white transition duration-150 ease-in-out">
                 接入点状态监测
               </a>
             </Link>
@@ -33,16 +33,16 @@ const Page: NextPage = () => {
           <div className="flex justify-between">
             <div className="text-2xl">接入点状态监测</div>
             <a
-              className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out cursor-pointer"
+              className="cursor-pointer text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800"
               onClick={() => setIsOpen(!isOpen)}
             >
               可用接入点列表
             </a>
           </div>
 
-          <div className="px-6 bg-white mt-4">
+          <div className="mt-4 bg-white px-6">
             <div className="overflow-x-auto">
-              <table className="w-full my-2">
+              <table className="my-2 w-full">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -50,7 +50,7 @@ const Page: NextPage = () => {
                     <th>HTTPS 状态</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 bg-white">
                   {points &&
                     points.map((item, index) => (
                       <tr key={index} className="hover:bg-slate-200">
@@ -65,25 +65,25 @@ const Page: NextPage = () => {
                             [
                               <span
                                 key={EndPointStatus.notSet}
-                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800"
+                                className="inline-flex rounded-full bg-slate-100 px-2 text-xs font-semibold text-slate-800"
                               >
                                 未设置
                               </span>,
                               <span
                                 key={EndPointStatus.waiting}
-                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-slate-100 text-slate-800"
+                                className="inline-flex rounded-full bg-slate-100 px-2 text-xs font-semibold text-slate-800"
                               >
                                 获取中
                               </span>,
                               <span
                                 key={EndPointStatus.fail}
-                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100 text-red-800"
+                                className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold text-red-800"
                               >
                                 无法访问
                               </span>,
                               <span
                                 key={EndPointStatus.success}
-                                className="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                                className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold text-green-800"
                               >
                                 {formatNumber(item.number)} ( {item.version} )
                               </span>,
@@ -97,7 +97,7 @@ const Page: NextPage = () => {
                               className="ml-4 text-indigo-500"
                               title="打开新窗口查看接入点"
                             >
-                              <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
+                              <i className={"inline-block h-4 w-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>
                             </a>
                           )}
                         </td>
@@ -109,24 +109,24 @@ const Page: NextPage = () => {
           </div>
         </div>
 
-        <div className={"fixed z-10 inset-0 overflow-y-auto " + (isOpen ? "block" : "hidden")}>
-          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className={"fixed inset-0 z-10 overflow-y-auto " + (isOpen ? "block" : "hidden")}>
+          <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-slate-500 opacity-75"></div>
             </div>
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <span className="hidden sm:inline-block sm:h-screen sm:align-middle"></span>&#8203;
+            <div className="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle">
               <div className="bg-white px-4 pt-5">
-                <h3 className="text-lg leading-6 font-medium text-slate-900 pb-2">可用接入点列表</h3>
+                <h3 className="pb-2 text-lg font-medium leading-6 text-slate-900">可用接入点列表</h3>
                 <div className="sm:flex sm:items-start">
                   <pre className="h-64 w-full overflow-auto text-sm">{JSON.stringify(accessPoints, null, 2)}</pre>
                 </div>
               </div>
-              <div className="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div className="bg-slate-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full rounded-md border border-slate-300 px-4 py-2 bg-white text-base leading-6 font-medium text-slate-700 shadow-sm hover:text-slate-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                    className="focus:shadow-outline-blue inline-flex w-full justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-base font-medium leading-6 text-slate-700 shadow-sm transition duration-150 ease-in-out hover:text-slate-500 focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
                     onClick={() => setIsOpen(!isOpen)}
                   >
                     关闭

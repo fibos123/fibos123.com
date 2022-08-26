@@ -3,7 +3,7 @@ import { Layout } from "../components";
 
 const Page: NextPage = () => {
   return (
-    <Layout title="BP 信息 | FIBOS 导航" mode="dark">
+    <Layout title="BP 信息 | FIBOS 导航" id="about-page">
       <div className="p-6 flex items-center justify-center h-full">
         <div>
           <h2 className="text-5xl">FIBOS 导航竞选 FIBOS 超级节点</h2>
