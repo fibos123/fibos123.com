@@ -38,7 +38,7 @@ const Page: NextPage = () => {
           </div>
           <div className="px-4 bg-white mt-4">
             <div className="overflow-x-auto">
-              <table className="w-full my-2">
+              <table>
                 <thead>
                   <tr>
                     <th>#</th>
@@ -48,7 +48,7 @@ const Page: NextPage = () => {
                     <th>最终生产时间</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-slate-100">
+                <tbody>
                   {producerStatus &&
                     producerStatus.rows2.map((item, index) => (
                       <tr key={item.bpname} className={item.bpname === producerStatus.head_block_producer ? "font-bold" : ""}>

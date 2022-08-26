@@ -22,12 +22,12 @@ const Page: NextPage = () => {
               detail.map((item) => (
                 <div key={item.title}>
                   <h2 className="text-xl py-4">{item.title}</h2>
-                  <table className="w-full">
+                  <table>
                     <tbody>
                       {item.list.map((item) => (
                         <tr key={item.key}>
-                          <th className="p-4 text-right w-32">{item.key}</th>
-                          <td style={{ whiteSpace: "break-spaces" }}>{item.value}</td>
+                          <th>{item.key}</th>
+                          <td className="whitespace-pre-line">{item.value}</td>
                         </tr>
                       ))}
                     </tbody>
