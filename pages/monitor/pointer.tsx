@@ -94,7 +94,7 @@ const Page: NextPage = () => {
                               target="_blank"
                               href={item.ssl_endpoint + "/v1/chain/get_info"}
                               rel="noreferrer"
-                              className="ml-4 fill-indigo-500"
+                              className="ml-4 text-indigo-500"
                               title="打开新窗口查看接入点"
                             >
                               <i className={"inline-block w-4 h-4"} dangerouslySetInnerHTML={{ __html: linkIcon }}></i>

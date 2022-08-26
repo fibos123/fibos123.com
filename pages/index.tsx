@@ -52,7 +52,7 @@ const Page: NextPage = () => {
                             rel="noreferrer"
                             className="hover:bg-indigo-50 block pt-3 px-1 sm:px-4 rounded transition duration-150 ease-in-out h-32 sm:h-24"
                           >
-                            <p className="pb-1 text-blue-500 fill-blue-500">
+                            <p className="pb-1 text-blue-500">
                               {item.icon && (
                                 <i
                                   className={"inline-block w-4 mr-2 align-middle"}

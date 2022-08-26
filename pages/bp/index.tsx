@@ -26,7 +26,7 @@ const Page: NextPage = () => {
         </div>
         <div className="px-6 bg-white mt-6">
           <div className="overflow-x-auto">
-            <table className="w-full my-2">
+            <table className="my-2">
               <thead>
                 <tr>
                   <th className="text-center w-6">#</th>
@@ -40,7 +40,7 @@ const Page: NextPage = () => {
                   <th>操作</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-100">
+              <tbody>
                 {bpList.map((item, index) => (
                   <tr key={index}>
                     <td className="text-slate-400 text-center">{index + 1}</td>

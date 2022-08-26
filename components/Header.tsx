@@ -39,7 +39,7 @@ export const Header = () => {
             <div className="flex items-center justify-between w-full sm:w-auto">
               <Link href="/" aria-label="Home">
                 <svg
-                  className="h-8 w-auto sm:h-10 fill-current text-indigo-600"
+                  className="h-8 w-auto sm:h-10 text-indigo-600"
                   id="Capa_1"
                   height="512"
                   viewBox="0 0 511.819 511.819"
@@ -72,8 +72,8 @@ export const Header = () => {
               <Link href={item.path} key={item.path}>
                 <a
                   className={
-                    "font-medium hover:text-indigo-600 hover:fill-indigo-600 transition duration-150 ease-in-out p-4 " +
-                    (firstPath === item.path ? "text-indigo-600 fill-indigo-600" : "text-slate-400 fill-slate-400")
+                    "font-medium hover:text-indigo-600 transition duration-150 ease-in-out p-4 " +
+                    (firstPath === item.path ? "text-indigo-600" : "text-slate-400")
                   }
                   href={item.path}
                 >
@@ -96,7 +96,7 @@ export const Header = () => {
             <div className="px-5 pt-4 flex items-center justify-between">
               <div>
                 <svg
-                  className="h-8 w-auto fill-current text-indigo-600"
+                  className="h-8 w-auto text-indigo-600"
                   id="Capa_1"
                   height="512"
                   viewBox="0 0 511.819 511.819"
