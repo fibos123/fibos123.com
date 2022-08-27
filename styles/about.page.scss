@@ -4,14 +4,9 @@
 
   svg,
   a {
-    @apply text-white;
+    @apply text-white hover:text-gray-500;
   }
 
-  a:hover {
-    @apply text-gray-500;
-  }
-
-  .bg-slate-100,
   .bg-white {
     @apply bg-transparent;
   }
