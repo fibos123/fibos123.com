@@ -2,20 +2,20 @@ import React from "react";
 import Link from "next/link";
 
 export const Footer = () => (
-  <div className="bg-white px-6 h-32 flex justify-between absolute bottom-0 w-full items-center">
+  <div className="absolute bottom-0 flex h-32 w-full items-center justify-between bg-white px-6">
     <div>
       © {new Date().getFullYear()}
-      <a className="px-2 text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out" href="https://www.fibos123.com/">
+      <a className="px-2 text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800" href="https://www.fibos123.com/">
         FIBOS 导航
       </a>
       |
       <Link href="/about">
-        <a className="pl-1 text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">BP 信息</a>
+        <a className="pl-1 text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">BP 信息</a>
       </Link>
     </div>
     <div>
       <Link href="/">
-        <a className="text-indigo-500 hover:text-indigo-800 transition duration-150 ease-in-out">返回首页</a>
+        <a className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">返回首页</a>
       </Link>
     </div>
   </div>

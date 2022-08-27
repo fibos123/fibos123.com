@@ -82,7 +82,7 @@ export const useProducerDetail = (account_name: string) => {
       for (const key in bp.json.org) {
         list.push({
           key: key,
-          value: "object" === typeof bp.json.org[key] ? JSON.stringify(bp.json.org[key]) : bp.json.org[key],
+          value: "object" === typeof bp.json.org[key] ? JSON.stringify(bp.json.org[key], null, 2) : bp.json.org[key],
         });
       }
       detail.push({

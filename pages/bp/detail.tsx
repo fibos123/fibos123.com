@@ -27,7 +27,7 @@ const Page: NextPage = () => {
                       {item.list.map((item) => (
                         <tr key={item.key}>
                           <th>{item.key}</th>
-                          <td className="whitespace-pre-line">{item.value}</td>
+                          <td className="whitespace-pre-wrap">{item.value}</td>
                         </tr>
                       ))}
                     </tbody>

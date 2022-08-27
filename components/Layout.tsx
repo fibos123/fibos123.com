@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const Layout = ({ children, title = "This is the default title", id }: Props) => (
-  <div id={id} className="bg-slate-100 text-slate-800 mx-auto min-h-screen relative pb-32 ">
+  <div id={id} className="relative mx-auto min-h-screen bg-slate-100 pb-32 text-slate-800 ">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />

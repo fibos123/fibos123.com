@@ -33,13 +33,13 @@ export const Header = () => {
 
   return (
     <div className="relative">
-      <div className="py-6 sm:px-6 px-8">
-        <nav className="flex items-center sm:h-10 justify-start">
-          <div className="flex items-center flex-shrink-0 flex-grow sm:flex-grow-0">
-            <div className="flex items-center justify-between w-full sm:w-auto">
+      <div className="py-6 px-8 sm:px-6">
+        <nav className="flex items-center justify-start sm:h-10">
+          <div className="flex flex-shrink-0 flex-grow items-center sm:flex-grow-0">
+            <div className="flex w-full items-center justify-between sm:w-auto">
               <Link href="/" aria-label="Home">
                 <svg
-                  className="h-8 w-auto sm:h-10 text-indigo-600"
+                  className="h-8 w-auto text-indigo-600 sm:h-10"
                   id="Capa_1"
                   height="512"
                   viewBox="0 0 511.819 511.819"
@@ -55,7 +55,7 @@ export const Header = () => {
                 <button
                   onClick={() => setIsOpen(true)}
                   type="button"
-                  className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-400 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 focus:text-slate-400 transition duration-150 ease-in-out"
+                  className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 transition duration-150 ease-in-out hover:bg-slate-100 hover:text-slate-400 focus:bg-slate-100 focus:text-slate-400 focus:outline-none"
                   id="main-menu"
                   aria-label="Main menu"
                   aria-haspopup="true"
@@ -67,17 +67,17 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          <div className="hidden sm:block pl-4">
+          <div className="hidden pl-4 sm:block">
             {menu.map((item) => (
               <Link href={item.path} key={item.path}>
                 <a
                   className={
-                    "font-medium hover:text-indigo-600 transition duration-150 ease-in-out p-4 " +
+                    "p-4 font-medium transition duration-150 ease-in-out hover:text-indigo-600 " +
                     (firstPath === item.path ? "text-indigo-600" : "text-slate-400")
                   }
                   href={item.path}
                 >
-                  <i className={"inline-block w-5 h-5 mr-2 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
+                  <i className={"mr-2 inline-block h-5 w-5 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
                   <span className="align-middle">{item.name}</span>
                 </a>
               </Link>
@@ -85,15 +85,15 @@ export const Header = () => {
           </div>
         </nav>
       </div>
-      <div className={"absolute top-0 inset-x-0 p-2 transition transform origin-top-right sm:hidden " + (isOpen ? "block" : "hidden")}>
+      <div className={"absolute inset-x-0 top-0 origin-top-right transform p-2 transition sm:hidden " + (isOpen ? "block" : "hidden")}>
         <div className="rounded-lg shadow-md">
           <div
-            className="rounded-lg bg-white shadow-xs overflow-hidden"
+            className="shadow-xs overflow-hidden rounded-lg bg-white"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="main-menu"
           >
-            <div className="px-5 pt-4 flex items-center justify-between">
+            <div className="flex items-center justify-between px-5 pt-4">
               <div>
                 <svg
                   className="h-8 w-auto text-indigo-600"
@@ -112,7 +112,7 @@ export const Header = () => {
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
-                  className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-400 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 focus:text-slate-400 transition duration-150 ease-in-out"
+                  className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 transition duration-150 ease-in-out hover:bg-slate-100 hover:text-slate-400 focus:bg-slate-100 focus:text-slate-400 focus:outline-none"
                   aria-label="Close menu"
                 >
                   <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ export const Header = () => {
                 <Link href={item.path} key={item.path}>
                   <a
                     className={
-                      "block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 focus:outline-none focus:text-indigo-600 focus:bg-slate-50 transition duration-150 ease-in-out " +
+                      "block rounded-md px-3 py-2 text-base font-medium text-slate-700 transition duration-150 ease-in-out hover:bg-slate-50 hover:text-indigo-600 focus:bg-slate-50 focus:text-indigo-600 focus:outline-none " +
                       (firstPath === item.path ? "text-indigo-600" : "")
                     }
                     href={item.path}
