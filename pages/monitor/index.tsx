@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { Layout } from "../../components";
-import { useProducerStatus } from "../../hooks";
+import { useMonitor } from "../../hooks";
 import { formatDate, formatNumber } from "../../utils";
 
 const Page: NextPage = () => {
-  const { card, producerStatus } = useProducerStatus();
+  const { monitors, producerStatus } = useMonitor();
 
   return (
     <Layout title="节点监控 | FIBOS 导航">
@@ -27,8 +27,8 @@ const Page: NextPage = () => {
           <div className="pb-4 text-2xl">出块节点在线状态</div>
           <div>
             <div className="flex flex-wrap gap-4 text-center">
-              {card &&
-                card.map((item) => (
+              {monitors &&
+                monitors.map((item) => (
                   <div key={item.name} className="flex-1 rounded bg-white p-4">
                     <h2 className="text-slate-500">{item.name}</h2>
                     <div className="whitespace-no-wrap h-6 text-lg">{item.value}</div>

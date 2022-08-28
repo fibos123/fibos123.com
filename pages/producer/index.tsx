@@ -88,9 +88,9 @@ const Page: NextPage = () => {
                       </a>
                     </td>
                     <td>
-                      <Link href={"/bp/detail?account=" + item.owner}>
+                      <Link href={"/producer/detail?account=" + item.owner}>
                         <a
-                          href={"/bp/detail?account=" + item.owner}
+                          href={"/producer/detail?account=" + item.owner}
                           className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800"
                         >
                           详情

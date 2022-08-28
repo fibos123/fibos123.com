@@ -6,9 +6,9 @@ const Page: NextPage = () => {
   const { sites } = useSites();
 
   return (
-    <Layout title="FIBOS 导航" id="home-page">
+    <Layout title="FIBOS 导航">
       <div>
-        <div className="bg bg-black bg-cover bg-center py-20 text-center text-white">
+        <div className="bg-black bg-cover bg-center py-20 text-center text-white" style={{ backgroundImage: 'url("/bg.jpg")' }}>
           <div className="pb-1 text-4xl">FIBOS 导航</div>
           <div>一个收录 FIBOS 网址及资源的小导航</div>
         </div>

@@ -38,7 +38,7 @@ const Page: NextPage = () => {
         </div>
 
         <div className="py-6">
-          <Link href="/bp">
+          <Link href="/producer">
             <a className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">返回列表</a>
           </Link>
         </div>
