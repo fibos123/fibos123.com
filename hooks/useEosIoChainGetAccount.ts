@@ -1,17 +1,15 @@
-import useSWR from "swr";
+import { useGet } from "./useGet";
 import { api } from "../config";
 import { IEosIoChainGetAccount } from "../types";
-import { post } from "../utils";
 
 export const useEosIoChainGetAccount = (account_name: string) => {
   const body = { account_name };
-  const key = api.rpcGetTableRows + "?" + JSON.stringify(body);
-  const { data, error } = useSWR<IEosIoChainGetAccount>(key, post(api.rpcGetAccount, body));
+  const { data, isLoading, isError } = useGet<IEosIoChainGetAccount, any>({
+    url: api.rpcGetAccount,
+    method: "POST",
+    body,
+  });
   const account = data;
 
-  return {
-    account,
-    isLoading: error && !data,
-    isError: error,
-  };
+  return { account, isLoading, isError };
 };

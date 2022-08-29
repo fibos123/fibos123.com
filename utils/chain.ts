@@ -1,6 +1,11 @@
 import { EndPointStatus } from "../enums";
-import { IProducer, IEosIoChainGetGlobal, IEosIoChainGetProducerJson, IEosIoChainGetProducers, IPoints } from "../types";
-import { get } from "./request";
+import {
+  IProducer,
+  IEosIoChainGetGlobal,
+  IEosIoChainGetProducerJson,
+  IEosIoChainGetProducers,
+  IPoints,
+} from "../types";
 
 export const getStaked = (totalVotes: number): number => {
   if (totalVotes === 0) return 0;
@@ -18,7 +23,8 @@ export const getClaimRewards = (producer: IEosIoChainGetProducers, global: IEosI
     };
   }
   const block_pay = (global.perblock_bucket * producer.unpaid_blocks) / global.total_unpaid_blocks / 10000;
-  const vote_pay = (global.pervote_bucket * parseInt(producer.total_votes)) / parseInt(global.total_producer_vote_weight) / 10000;
+  const vote_pay =
+    (global.pervote_bucket * parseInt(producer.total_votes)) / parseInt(global.total_producer_vote_weight) / 10000;
   const multiple = 1;
   const block_pay_fix = rank <= 21 ? 320 * multiple : block_pay;
   const total = block_pay_fix + vote_pay >= 100 * multiple ? block_pay_fix + vote_pay : 0;
@@ -134,9 +140,12 @@ export class PointersStatus {
       .filter((item) => item.status === EndPointStatus.waiting)
       .forEach(async (item) => {
         try {
-          const response = await get(item.ssl_endpoint + this.point);
-          item.number = response?.head_block_num || 0;
-          item.version = response?.server_version_string || "";
+          const url = item.ssl_endpoint + this.point;
+          const response = await fetch(url);
+          const data = await response.json();
+
+          item.number = data.head_block_num || 0;
+          item.version = data.server_version_string || "";
           if (item.number) {
             item.status = EndPointStatus.success;
           } else {

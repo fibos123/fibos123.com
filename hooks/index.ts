@@ -1,3 +1,4 @@
+export { useGet } from "./useGet";
 export { useSites } from "./useSites";
 export { useMonitor } from "./useMonitor";
 export { usePointer } from "./usePointer";

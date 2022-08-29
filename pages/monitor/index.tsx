@@ -5,7 +5,7 @@ import { useMonitor } from "../../hooks";
 import { formatDate, formatNumber } from "../../utils";
 
 const Page: NextPage = () => {
-  const { monitors, producerStatus } = useMonitor();
+  const { monitors, producerStatus } = useMonitor(true);
 
   return (
     <Layout title="节点监控 | FIBOS 导航">
@@ -51,8 +51,13 @@ const Page: NextPage = () => {
                 <tbody>
                   {producerStatus &&
                     producerStatus.rows2.map((item, index) => (
-                      <tr key={item.bpname} className={item.bpname === producerStatus.head_block_producer ? "font-bold" : ""}>
-                        <td className={item.bpname === producerStatus.head_block_producer ? "text-slate-800" : ""}>{index + 1}</td>
+                      <tr
+                        key={item.bpname}
+                        className={item.bpname === producerStatus.head_block_producer ? "font-bold" : ""}
+                      >
+                        <td className={item.bpname === producerStatus.head_block_producer ? "text-slate-800" : ""}>
+                          {index + 1}
+                        </td>
                         <td className="whitespace-no-wrap px-4 py-2">
                           <div className="flex items-center">
                             <div className="ml-2">
@@ -69,7 +74,9 @@ const Page: NextPage = () => {
                                 </span>
                               ),
                               offline: (
-                                <span className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold text-red-800">离线</span>
+                                <span className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold text-red-800">
+                                  离线
+                                </span>
                               ),
                             }[producerStatus.head_block_num - item.number <= 242 ? "online" : "offline"]
                           }

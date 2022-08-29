@@ -1,15 +1,10 @@
-import useSWR from "swr";
 import { api } from "../config";
 import { IEosIoChainGetTableRows } from "../types";
-import { post } from "../utils";
+import { useGet } from "./useGet";
 
 export const useEosIoChainGetTableRows = <T>(body: any) => {
   const key = api.rpcGetTableRows + "?" + JSON.stringify(body);
-  const { data, error } = useSWR<IEosIoChainGetTableRows<T>>(key, post(api.rpcGetTableRows, body));
+  const { data, isLoading, isError } = useGet<IEosIoChainGetTableRows<T>, any>({ url: api.rpcGetTableRows, method: "POST", body });
 
-  return {
-    data,
-    isLoading: error && !data,
-    isError: error,
-  };
+  return { data, isLoading, isError };
 };

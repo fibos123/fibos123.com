@@ -5,7 +5,7 @@ import { useProducerInfo, useProducers } from "../../hooks";
 import { formatPercent, formatNumber } from "../../utils";
 
 const Page: NextPage = () => {
-  const { info } = useProducerInfo();
+  const { info } = useProducerInfo(true);
   const { bpList } = useProducers();
 
   return (
@@ -46,7 +46,10 @@ const Page: NextPage = () => {
                     <td className="text-center text-slate-400">{index + 1}</td>
                     <td className="px-2 py-2 text-center">
                       {item.logo && (
-                        <span className="mx-auto block h-12 w-12 bg-cover" style={{ backgroundImage: "url(" + item.logo + ")" }}></span>
+                        <span
+                          className="mx-auto block h-12 w-12 bg-cover"
+                          style={{ backgroundImage: "url(" + item.logo + ")" }}
+                        ></span>
                       )}
                     </td>
                     <td>
