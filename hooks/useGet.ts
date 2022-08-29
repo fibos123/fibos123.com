@@ -1,3 +1,4 @@
+import { log } from "console";
 import { useEffect, useState } from "react";
 
 interface IGetInfo {
@@ -24,7 +25,8 @@ export const useGet = <T, E>(
   { url, method = "GET", body }: IGetInfo,
   { refresh = false }: IGetInit = { refresh: false }
 ) => {
-  const cacheKey = url + "?" + JSON.stringify(body);
+  const bodyStringify = body ? JSON.stringify(body) : null;
+  const cacheKey = [method, url, bodyStringify].join();
   const [data, setData] = useState<T>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<E>();
@@ -40,7 +42,6 @@ export const useGet = <T, E>(
       }
 
       try {
-        const bodyStringify = body ? JSON.stringify(body) : null;
         const response = await fetch(url, { method, body: bodyStringify });
         const data: T = await response.json();
         setData(data);
