@@ -4,10 +4,7 @@ interface IGetInfo {
   url: string;
   method?: "GET" | "POST";
   body?: any;
-}
-
-interface IGetInit {
-  refresh: boolean;
+  refresh?: boolean;
 }
 
 const cache = new Map<string, any>();
@@ -21,8 +18,7 @@ const refreshInterval = 1000;
  * @returns
  */
 export const useGet = <T, E>(
-  { url, method = "GET", body }: IGetInfo,
-  { refresh = false }: IGetInit = { refresh: false }
+  { url, method = "GET", body, refresh = false }: IGetInfo
 ) => {
   const bodyStringify = body ? JSON.stringify(body) : null;
   const cacheKey = [method, url, bodyStringify].join();

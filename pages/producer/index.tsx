@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { Layout } from "../../components";
-import { useProducerInfo, useProducers } from "../../hooks";
+import { useHeadBlockInfo, useProducers } from "../../hooks";
 import { formatPercent, formatNumber } from "../../utils";
 
 const Page: NextPage = () => {
-  const { info } = useProducerInfo(true);
+  const { info } = useHeadBlockInfo(true);
   const { bpList } = useProducers();
 
   return (

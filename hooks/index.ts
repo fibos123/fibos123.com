@@ -3,7 +3,7 @@ export { useSites } from "./useSites";
 export { useMonitor } from "./useMonitor";
 export { usePointer } from "./usePointer";
 export { useProducerDetail } from "./useProducerDetail";
-export { useProducerInfo } from "./useProducerInfo";
+export { useHeadBlockInfo } from "./useHeadBlockInfo";
 export { useProducers } from "./useProducers";
 export { useEosIoChainGetInfo } from "./useEosIoChainGetInfo";
 export { useEosIoChainGetAccount } from "./useEosIoChainGetAccount";

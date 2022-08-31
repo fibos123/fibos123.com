@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import { Header, Footer } from "./";
-import { useMonitor, useProducerInfo, useProducers, useSites } from "../hooks";
+import { useMonitor, useHeadBlockInfo, useProducers, useSites } from "../hooks";
 
 type Props = {
   children?: ReactNode;
@@ -10,8 +10,9 @@ type Props = {
 };
 
 export const Layout = ({ children, title = "This is the default title", id }: Props) => {
+  // preload data
   useSites();
-  useProducerInfo(false);
+  useHeadBlockInfo(false);
   useProducers();
   useMonitor(false);
 

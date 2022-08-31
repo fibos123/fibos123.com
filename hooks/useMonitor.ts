@@ -4,7 +4,7 @@ import { IProducerStatus } from "../types";
 import { formatDate, formatNumber } from "../utils";
 
 export const useMonitor = (refresh = false) => {
-  const { data, isLoading, isError } = useGet<IProducerStatus, any>({ url: api.apiBpStatus }, { refresh });
+  const { data, isLoading, isError } = useGet<IProducerStatus, any>({ url: api.apiBpStatus, refresh });
 
   const monitors = [
     {
