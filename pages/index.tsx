@@ -7,8 +7,11 @@ const Page: NextPage = () => {
 
   return (
     <Layout title="FIBOS 导航">
-      <div>
-        <div className="bg-black bg-cover bg-center py-20 text-center text-white" style={{ backgroundImage: 'url("/bg.jpg")' }}>
+      <main>
+        <div
+          className="bg-black bg-cover bg-center py-20 text-center text-white"
+          style={{ backgroundImage: 'url("/bg.jpg")' }}
+        >
           <div className="pb-1 text-4xl">FIBOS 导航</div>
           <div>一个收录 FIBOS 网址及资源的小导航</div>
         </div>
@@ -18,7 +21,10 @@ const Page: NextPage = () => {
               <section key={item.name} className="mb-4 rounded bg-white p-4">
                 <div className="border-b pb-4 text-lg sm:pl-2">
                   {item.icon && (
-                    <i className={"mr-2 inline-block h-5 w-5 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
+                    <i
+                      className={"mr-2 inline-block h-5 w-5 align-middle"}
+                      dangerouslySetInnerHTML={{ __html: item.icon }}
+                    ></i>
                   )}
                   <span className="align-middle">{item.name}</span>
                 </div>
@@ -74,7 +80,7 @@ const Page: NextPage = () => {
               </section>
             ))}
         </div>
-      </div>
+      </main>
     </Layout>
   );
 };

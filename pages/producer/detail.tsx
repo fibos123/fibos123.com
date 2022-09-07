@@ -11,7 +11,7 @@ const Page: NextPage = () => {
 
   return (
     <Layout title="节点信息 | FIBOS 导航">
-      <div className="px-6">
+      <main className="px-6">
         <div className="rounded bg-white p-6">
           <div className="border-b pb-4">
             <h1 className="text-2xl">{account} 节点详情</h1>
@@ -42,7 +42,7 @@ const Page: NextPage = () => {
             <a className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">返回列表</a>
           </Link>
         </div>
-      </div>
+      </main>
     </Layout>
   );
 };

@@ -10,7 +10,7 @@ const Page: NextPage = () => {
 
   return (
     <Layout title="节点列表 | FIBOS 导航">
-      <div>
+      <main>
         <div className="px-6">
           <div className="pb-4 text-2xl">节点列表</div>
 
@@ -106,7 +106,7 @@ const Page: NextPage = () => {
             </table>
           </div>
         </div>
-      </div>
+      </main>
     </Layout>
   );
 };

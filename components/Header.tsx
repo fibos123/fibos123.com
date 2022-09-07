@@ -34,13 +34,13 @@ export const Header = () => {
   const firstPath = getFirstPath();
 
   return (
-    <div className="relative">
+    <header className="relative">
       <div className="py-6 px-8 sm:px-6">
         <nav className="flex items-center justify-start sm:h-10">
           <div className="flex flex-shrink-0 flex-grow items-center sm:flex-grow-0">
             <div className="flex w-full items-center justify-between sm:w-auto">
               <Link href="/" aria-label="Home">
-                <i className="h-10 w-10 text-indigo-600 sm:h-10" dangerouslySetInnerHTML={{ __html: logo }}></i>
+                <i className="logo h-10 w-10 text-indigo-600 sm:h-10" dangerouslySetInnerHTML={{ __html: logo }}></i>
               </Link>
               <div className="-mr-2 flex items-center sm:hidden">
                 <button
@@ -79,7 +79,7 @@ export const Header = () => {
           </div>
         </nav>
       </div>
-      <div
+      <nav
         className={
           "absolute inset-x-0 top-0 origin-top-right transform p-2 transition sm:hidden " +
           (isOpen ? "block" : "hidden")
@@ -93,7 +93,7 @@ export const Header = () => {
             aria-labelledby="main-menu"
           >
             <div className="flex items-center justify-between px-5 pt-4">
-              <i className="h-8 w-8 text-indigo-600 " dangerouslySetInnerHTML={{ __html: logo }}></i>
+              <i className="logo h-8 w-8 text-indigo-600 " dangerouslySetInnerHTML={{ __html: logo }}></i>
               <div className="-mr-2">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
@@ -125,7 +125,7 @@ export const Header = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 };

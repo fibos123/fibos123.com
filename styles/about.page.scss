@@ -2,12 +2,18 @@
   background-image: url("/bg.jpg");
   @apply bg-cover bg-center bg-no-repeat text-white;
 
-  svg,
+  .logo,
   a {
     @apply text-white hover:text-gray-500;
   }
 
-  .bg-white {
+  nav {
+    .bg-white {
+      @apply bg-black;
+    }
+  }
+
+  footer {
     @apply bg-transparent;
   }
 }

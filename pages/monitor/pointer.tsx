@@ -15,7 +15,7 @@ const Page: NextPage = () => {
 
   return (
     <Layout title="节点监控 | FIBOS 导航">
-      <div>
+      <main>
         <div className="px-6">
           <div className="pb-4">
             <Link href="/monitor">
@@ -136,7 +136,7 @@ const Page: NextPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </Layout>
   );
 };
