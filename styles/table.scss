@@ -1,0 +1,33 @@
+table {
+  @apply w-full;
+
+  thead {
+    tr {
+      th,
+      td {
+        @apply whitespace-nowrap;
+      }
+
+      th {
+        @apply px-2 py-3 text-left text-xs tracking-wider text-slate-500;
+      }
+    }
+  }
+
+  tbody {
+    @apply divide-y divide-slate-100;
+
+    tr {
+      @apply even:bg-slate-50 hover:bg-slate-100;
+
+      th,
+      td {
+        @apply whitespace-nowrap px-2 py-3;
+      }
+
+      th {
+        @apply w-32 p-4 text-right;
+      }
+    }
+  }
+}

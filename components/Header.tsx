@@ -40,7 +40,7 @@ export const Header = () => {
           <div className="flex flex-shrink-0 flex-grow items-center sm:flex-grow-0">
             <div className="flex w-full items-center justify-between sm:w-auto">
               <Link href="/" aria-label="Home">
-                <i className="h-8 w-auto text-indigo-600 sm:h-10" dangerouslySetInnerHTML={{ __html: logo }}></i>
+                <i className="h-10 w-10 text-indigo-600 sm:h-10" dangerouslySetInnerHTML={{ __html: logo }}></i>
               </Link>
               <div className="-mr-2 flex items-center sm:hidden">
                 <button
@@ -68,7 +68,10 @@ export const Header = () => {
                   }
                   href={item.path}
                 >
-                  <i className={"mr-2 inline-block h-5 w-5 align-middle"} dangerouslySetInnerHTML={{ __html: item.icon }}></i>
+                  <i
+                    className={"mr-2 inline-block h-5 w-5 align-middle"}
+                    dangerouslySetInnerHTML={{ __html: item.icon }}
+                  ></i>
                   <span className="align-middle">{item.name}</span>
                 </a>
               </Link>
@@ -76,7 +79,12 @@ export const Header = () => {
           </div>
         </nav>
       </div>
-      <div className={"absolute inset-x-0 top-0 origin-top-right transform p-2 transition sm:hidden " + (isOpen ? "block" : "hidden")}>
+      <div
+        className={
+          "absolute inset-x-0 top-0 origin-top-right transform p-2 transition sm:hidden " +
+          (isOpen ? "block" : "hidden")
+        }
+      >
         <div className="rounded-lg shadow-md">
           <div
             className="shadow-xs overflow-hidden rounded-lg bg-white"
