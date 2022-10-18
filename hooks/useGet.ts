@@ -17,9 +17,7 @@ const refreshInterval = 1000;
  * @param IGetInit
  * @returns
  */
-export const useGet = <T, E>(
-  { url, method = "GET", body, refresh = false }: IGetInfo
-) => {
+export const useGet = <T, E>({ url, method = "GET", body, refresh = false }: IGetInfo) => {
   const bodyStringify = body ? JSON.stringify(body) : null;
   const cacheKey = [method, url, bodyStringify].join();
   const [data, setData] = useState<T>();
@@ -39,6 +37,11 @@ export const useGet = <T, E>(
       try {
         const response = await fetch(url, { method, body: bodyStringify });
         const data: T = await response.json();
+
+        if (!response.ok) {
+          throw data;
+        }
+
         setData(data);
         cache.set(cacheKey, data);
       } catch (error) {
