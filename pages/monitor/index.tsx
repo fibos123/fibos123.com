@@ -11,15 +11,17 @@ const Page: NextPage = () => {
     <Layout title="节点监控 | FIBOS 导航">
       <main className="px-6">
         <div className="pb-4">
-          <Link href="/monitor">
-            <a className="cursor-default rounded bg-indigo-500 py-2 px-4 text-white transition duration-150 ease-in-out">
-              出块节点在线状态
-            </a>
+          <Link
+            href="/monitor"
+            className="cursor-default rounded bg-indigo-500 py-2 px-4 text-white transition duration-150 ease-in-out"
+          >
+            出块节点在线状态
           </Link>
-          <Link href="/monitor/pointer">
-            <a className="ml-4 rounded bg-white py-2 px-4 text-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white">
-              接入点状态监测
-            </a>
+          <Link
+            href="/monitor/pointer"
+            className="ml-4 rounded bg-white py-2 px-4 text-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+          >
+            接入点状态监测
           </Link>
         </div>
 

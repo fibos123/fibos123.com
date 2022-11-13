@@ -40,7 +40,10 @@ export const Header = () => {
           <div className="flex flex-shrink-0 flex-grow items-center sm:flex-grow-0">
             <div className="flex w-full items-center justify-between sm:w-auto">
               <Link href="/" aria-label="Home">
-                <i className="logo h-10 w-10 text-indigo-600 sm:h-10" dangerouslySetInnerHTML={{ __html: logo }}></i>
+                <i
+                  className="logo block h-10 w-10 text-indigo-600 sm:h-10"
+                  dangerouslySetInnerHTML={{ __html: logo }}
+                ></i>
               </Link>
               <div className="-mr-2 flex items-center sm:hidden">
                 <button
@@ -60,20 +63,19 @@ export const Header = () => {
           </div>
           <div className="hidden pl-4 sm:block">
             {menu.map((item) => (
-              <Link href={item.path} key={item.path}>
-                <a
-                  className={
-                    "p-4 font-medium transition duration-150 ease-in-out hover:text-indigo-600 " +
-                    (firstPath === item.path ? "text-indigo-600" : "text-slate-400")
-                  }
-                  href={item.path}
-                >
-                  <i
-                    className={"mr-2 inline-block h-5 w-5 align-middle"}
-                    dangerouslySetInnerHTML={{ __html: item.icon }}
-                  ></i>
-                  <span className="align-middle">{item.name}</span>
-                </a>
+              <Link
+                href={item.path}
+                key={item.path}
+                className={
+                  "p-4 font-medium transition duration-150 ease-in-out hover:text-indigo-600 " +
+                  (firstPath === item.path ? "text-indigo-600" : "text-slate-400")
+                }
+              >
+                <i
+                  className={"mr-2 inline-block h-5 w-5 align-middle"}
+                  dangerouslySetInnerHTML={{ __html: item.icon }}
+                ></i>
+                <span className="align-middle">{item.name}</span>
               </Link>
             ))}
           </div>
@@ -93,7 +95,7 @@ export const Header = () => {
             aria-labelledby="main-menu"
           >
             <div className="flex items-center justify-between px-5 pt-4">
-              <i className="logo h-8 w-8 text-indigo-600 " dangerouslySetInnerHTML={{ __html: logo }}></i>
+              <i className="logo block h-8 w-8 text-indigo-600" dangerouslySetInnerHTML={{ __html: logo }}></i>
               <div className="-mr-2">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
@@ -109,17 +111,16 @@ export const Header = () => {
             </div>
             <div className="px-2 pt-2 pb-3">
               {menu.map((item) => (
-                <Link href={item.path} key={item.path}>
-                  <a
-                    className={
-                      "block rounded-md px-3 py-2 text-base font-medium text-slate-700 transition duration-150 ease-in-out hover:bg-slate-50 hover:text-indigo-600 focus:bg-slate-50 focus:text-indigo-600 focus:outline-none " +
-                      (firstPath === item.path ? "text-indigo-600" : "")
-                    }
-                    href={item.path}
-                  >
-                    <i className={"pr-1 " + item.icon}></i>
-                    {item.name}
-                  </a>
+                <Link
+                  href={item.path}
+                  key={item.path}
+                  className={
+                    "block rounded-md px-3 py-2 text-base font-medium text-slate-700 transition duration-150 ease-in-out hover:bg-slate-50 hover:text-indigo-600 focus:bg-slate-50 focus:text-indigo-600 focus:outline-none " +
+                    (firstPath === item.path ? "text-indigo-600" : "")
+                  }
+                >
+                  <i className={"pr-1 " + item.icon}></i>
+                  {item.name}
                 </Link>
               ))}
             </div>

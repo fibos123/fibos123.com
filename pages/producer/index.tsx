@@ -91,13 +91,11 @@ const Page: NextPage = () => {
                       </a>
                     </td>
                     <td>
-                      <Link href={"/producer/detail?account=" + item.owner}>
-                        <a
-                          href={"/producer/detail?account=" + item.owner}
-                          className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800"
-                        >
-                          详情
-                        </a>
+                      <Link
+                        href={"/producer/detail?account=" + item.owner}
+                        className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800"
+                      >
+                        详情
                       </Link>
                     </td>
                   </tr>

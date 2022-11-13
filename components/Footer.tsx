@@ -12,13 +12,13 @@ export const Footer = () => (
         FIBOS 导航
       </a>
       |
-      <Link href="/about">
-        <a className="pl-1 text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">BP 信息</a>
+      <Link href="/about" className="pl-1 text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">
+        BP 信息
       </Link>
     </div>
     <div>
-      <Link href="/">
-        <a className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">返回首页</a>
+      <Link href="/" className="text-indigo-500 transition duration-150 ease-in-out hover:text-indigo-800">
+        返回首页
       </Link>
     </div>
   </footer>
