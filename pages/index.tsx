@@ -45,7 +45,7 @@ const Page: NextPage = () => {
                             href={item.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="block h-32 rounded px-1 pt-3 transition duration-150 ease-in-out hover:bg-indigo-50 sm:h-24 sm:px-4"
+                            className="block h-32 rounded px-1 pt-3 transition duration-150 ease-in-out hover:scale-105 hover:bg-indigo-50  sm:h-24 sm:px-4"
                           >
                             <p className="pb-1 text-blue-500">
                               {item.icon && (
