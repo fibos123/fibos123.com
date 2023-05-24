@@ -29,8 +29,9 @@ export const Layout = ({ children, title = "This is the default title", id }: Pr
       <Header />
       {children}
       <Footer />
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-VH918P1NJQ"></Script>
+      <Script id="google-analytics-script1" async src="https://www.googletagmanager.com/gtag/js?id=G-VH918P1NJQ"></Script>
       <Script
+        id="google-analytics-script2"
         dangerouslySetInnerHTML={{
           __html: `
           window.dataLayer = window.dataLayer || [];
