@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import Head from "next/head";
 import { Header, Footer } from "./";
 import { useMonitor, useHeadBlockInfo, useProducers, useSites } from "../hooks";
+import Script from 'next/script'
 
 type Props = {
   children?: ReactNode;
@@ -28,6 +29,18 @@ export const Layout = ({ children, title = "This is the default title", id }: Pr
       <Header />
       {children}
       <Footer />
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-VH918P1NJQ"></Script>
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-VH918P1NJQ');
+        `,
+        }}
+      />
     </div>
   );
 };
