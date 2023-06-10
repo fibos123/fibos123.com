@@ -58,7 +58,8 @@ export const useGet = <T, E>({ url, method = "GET", body, refresh = false }: IGe
       const timer = setInterval(fetchData, refreshInterval);
       return () => clearInterval(timer);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, method, bodyStringify])
 
   return { data, isLoading, isError, error };
 };
