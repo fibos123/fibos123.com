@@ -1,7 +1,7 @@
 const apiEndpoint = "https://api.fibos123.com";
 // const rpcEndpoint = "https://rpc-mainnet.fibos123.com";
 // const rpcEndpoint = "https://rpc.fo.chains.one";
-const rpcEndpoint = "https://to-rpc.fibos.io/";
+const rpcEndpoint = "https://to-rpc.fibos.io";
 export const api = {
   apiEndpoint: apiEndpoint,
   apiBpStatus: apiEndpoint + "/bp_status",
