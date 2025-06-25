@@ -1,9 +1,16 @@
-import type { NextPage } from "next";
-import { Layout } from "../components";
+// It seems this page is static, so "use client" might not be needed
+// unless some child component requires client-side interactivity.
 
-const Page: NextPage = () => {
+export const metadata = {
+  title: "BP 信息 | FIBOS 导航",
+};
+
+export default function AboutPage() {
   return (
-    <Layout title="BP 信息 | FIBOS 导航" id="about-page">
+    // The id="about-page" was on the Layout component.
+    // We might need to adjust how styling or specific targeting is done.
+    // For now, I'll add a wrapper div with the id.
+    <div id="about-page">
       <main className="flex h-full items-center justify-center p-6">
         <div>
           <h2 className="text-5xl">FIBOS 导航竞选 FIBOS 超级节点</h2>
@@ -50,8 +57,6 @@ const Page: NextPage = () => {
           <div>Icons made by Freepik from www.flaticon.com</div>
         </div>
       </main>
-    </Layout>
+    </div>
   );
-};
-
-export default Page;
+}

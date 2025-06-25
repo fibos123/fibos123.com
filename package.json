@@ -7,25 +7,35 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build"
+    "export": "next build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
   },
   "dependencies": {
-    "next": "14.0.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "15.3.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@types/node": "20.9.0",
-    "@types/react": "18.2.37",
-    "@types/react-dom": "18.2.15",
-    "autoprefixer": "^10.4.16",
-    "eslint": "8.53.0",
-    "eslint-config-next": "14.0.1",
-    "postcss": "^8.4.31",
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.6",
-    "sass": "^1.69.5",
-    "tailwindcss": "^3.3.5",
-    "typescript": "5.2.2"
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "24.0.4",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "autoprefixer": "^10.4.21",
+    "eslint": "9.29.0",
+    "eslint-config-next": "15.3.4",
+    "eslint-plugin-jest": "^29.0.1",
+    "jest": "^30.0.3",
+    "jest-environment-jsdom": "^30.0.2",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.1",
+    "prettier-plugin-tailwindcss": "^0.6.13",
+    "sass": "^1.89.2",
+    "tailwindcss": "^4.1.10",
+    "ts-jest": "^29.4.0",
+    "typescript": "5.8.3"
   }
 }
