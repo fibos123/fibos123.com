@@ -79,7 +79,7 @@ const Page: NextPage = () => {
                                 离线
                               </span>
                             ),
-                          }[producerStatus.head_block_num - item.number <= 242 ? "online" : "offline"]
+                          }[producerStatus.head_block_num - item.number <= (242+10) ? "online" : "offline"]
                         }
                       </td>
                       <td className={item.bpname === producerStatus.head_block_producer ? "text-slate-800" : ""}>
