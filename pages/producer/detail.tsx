@@ -3,11 +3,17 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Layout } from "../../components";
 import { useProducerDetail } from "../../hooks";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const { account } = router.query as { account: string };
   const { detail } = useProducerDetail(account);
+  const [parent] = useAutoAnimate((el, action, oldCoords, newCoords) => {
+    let keyframes;
+    keyframes = [{ opacity: 0 }, { opacity: 1 }];
+    return new KeyframeEffect(el, keyframes, { duration: 100 });
+  });
 
   return (
     <Layout title="节点信息 | FIBOS 导航">
@@ -17,7 +23,7 @@ const Page: NextPage = () => {
             <h1 className="text-2xl">{account} 节点详情</h1>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" ref={parent}>
             {detail &&
               detail.map((item) => (
                 <div key={item.title}>
