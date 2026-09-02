@@ -1,4 +1,4 @@
-const apiEndpoint = "https://api.fibos123.com";
+const apiEndpoint = "https://api-fibos123-com.akirafy.workers.dev";
 // const rpcEndpoint = "https://rpc-mainnet.fibos123.com";
 // const rpcEndpoint = "https://rpc.fo.chains.one";
 const rpcEndpoint = "https://to-rpc.fibos.io";
