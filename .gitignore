@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# visual snapshot working dirs (daily-deps workflow)
+snapshot-before/
+snapshot-after/
+snapshot-diff/

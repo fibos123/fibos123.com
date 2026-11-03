@@ -1,0 +1,113 @@
+name: Daily minor dependency updates (visual-verified)
+
+# 每日流程（对应需求四步）：
+#   1. Playwright 给主要页面拍照（升级前）
+#   2. npx npm-check-updates --target minor -u && npm i
+#   3. 重新构建并再次拍照
+#   4. 像素对比无差别才提交 package.json / package-lock.json；
+#      有差别则不提交、上传对比图并把任务标红，等人工确认。
+# 升级后构建失败会直接让任务失败，同样不会提交。
+
+on:
+  schedule:
+    - cron: "0 18 * * *" # UTC 18:00 = 日本时间次日 03:00
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-deps
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      # ---- 1. 升级前快照 ----
+      - name: Build (before)
+        run: npm run build
+
+      - name: Snapshot (before)
+        run: |
+          node scripts/static-server.mjs 4173 out &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID" EXIT
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ >/dev/null && break || sleep 1; done
+          node scripts/snapshot.mjs snapshot-before
+          kill $SERVER_PID
+
+      # ---- 2. minor 更新 ----
+      - name: Update minor dependencies
+        id: ncu
+        run: |
+          npx npm-check-updates --target minor -u
+          npm i
+          if git diff --quiet -- package.json package-lock.json; then
+            echo "has_updates=false" >> "$GITHUB_OUTPUT"
+            echo "没有可更新的 minor 依赖，今天到此结束。"
+          else
+            echo "has_updates=true" >> "$GITHUB_OUTPUT"
+            git diff -- package.json
+          fi
+
+      # ---- 3. 升级后快照 ----
+      - name: Build (after)
+        if: steps.ncu.outputs.has_updates == 'true'
+        run: npm run build
+
+      - name: Snapshot (after)
+        if: steps.ncu.outputs.has_updates == 'true'
+        run: |
+          node scripts/static-server.mjs 4173 out &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID" EXIT
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ >/dev/null && break || sleep 1; done
+          node scripts/snapshot.mjs snapshot-after
+          kill $SERVER_PID
+
+      # ---- 4. 对比：无差别才提交 ----
+      - name: Compare snapshots
+        id: compare
+        if: steps.ncu.outputs.has_updates == 'true'
+        continue-on-error: true
+        run: node scripts/compare.mjs snapshot-before snapshot-after snapshot-diff
+
+      - name: Commit verified updates
+        if: steps.ncu.outputs.has_updates == 'true' && steps.compare.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore(deps): minor updates (visual check passed)"
+          git push
+
+      - name: Upload diff artifacts
+        if: steps.ncu.outputs.has_updates == 'true' && steps.compare.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshot-diff
+          path: |
+            snapshot-before
+            snapshot-after
+            snapshot-diff
+          retention-days: 14
+
+      - name: Fail when visuals changed
+        if: steps.ncu.outputs.has_updates == 'true' && steps.compare.outcome == 'failure'
+        run: |
+          echo "::error::升级后页面快照出现差异，已阻止自动提交。请下载 snapshot-diff 工件查看 diff 图，确认无误后手动执行 ncu 并提交。"
+          exit 1
